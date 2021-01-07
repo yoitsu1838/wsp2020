@@ -1,29 +1,23 @@
 package servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
+import model.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-import model.User;
-import model.UserDAO;
-import model.UserManager;
+public class Register extends HttpServlet {
 
-@WebServlet({"/login", "/"})
-public class Login extends HttpServlet {
-
-    public Login() {
+    public Register() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/signup.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,15 +26,17 @@ public class Login extends HttpServlet {
         boolean result = false;
         String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
 
-        result = UserManager.login(request, dbInfoPath);
+        result = UserManager.register(request, dbInfoPath);
 
+        System.out.println("Register.java:" + result);
         if (result) {
-            // ログインに成功している場合は member.jsp へ
-            getServletContext().getRequestDispatcher("/WEB-INF/views/member.jsp").forward(request, response);
-        } else {
-            // ログインに失敗している場合は login.jsp へ
-            request.setAttribute("errMsg", "ユーザ名またはパスワードが違います。");
+            // 登録成功
+            request.setAttribute("message", "登録が完了しました。ログインしてください。");
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+        } else {
+            // 登録失敗
+            request.setAttribute("errMsg", "登録できませんでした。すでに使用されているIDである可能性があります。");
+            getServletContext().getRequestDispatcher("/WEB-INF/views/signup.jsp").forward(request, response);
         }
     }
 }

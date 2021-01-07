@@ -68,7 +68,8 @@
                     </div>
 
                     <!-- Sign in button -->
-                    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+                    <button class="btn btn-info my-4" type="submit">ログイン</button>
+                    <a class="btn btn-default my-4　btn-sm" href="Register">新規登録</a>
 
 
                 </form>

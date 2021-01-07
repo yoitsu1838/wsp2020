@@ -53,13 +53,14 @@
             <div class="col-lg-12 col-md-12 mb-4">
                 <h2>認証されていません</h2>
                 <hr>
-                <div class="alert alert-danger" role="alert">
-                    <%
-                        if(session.getAttribute("login") != null && !(Boolean)session.getAttribute("login")) {
-                            out.println("ユーザ名またはパスワードが違います");
-                        }
-                    %>
-                </div>
+                <% String errMsg = (String)request.getAttribute("errMsg");%>
+                <% if (errMsg!=null){ %>
+                <div class="alert alert-danger" role="alert"><%= errMsg %></div>
+                <% } %>
+                <% String message = (String)request.getAttribute("message");%>
+                <% if (message!=null){ %>
+                <div class="alert alert-success" role="alert"><%= message %></div>
+                <% } %>
                 <!-- Default form login -->
                 <form class="text-center border border-light p-5" action="Login" method="POST">
                     <!-- Email -->
@@ -73,7 +74,8 @@
                     </div>
 
                     <!-- Sign in button -->
-                    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+                    <button class="btn btn-info my-4" type="submit">ログイン</button>
+                    <a class="btn btn-default my-4　btn-sm" href="Register">新規登録</a>
 
 
                 </form>
