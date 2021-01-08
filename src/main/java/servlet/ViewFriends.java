@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LendApprove extends HttpServlet {
+public class ViewFriends extends HttpServlet {
 
-    public LendApprove() {
+    public ViewFriends() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/lend.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,11 +32,11 @@ public class LendApprove extends HttpServlet {
         if (result) {
             // 登録成功
             request.setAttribute("message", "登録が完了しました。ログインしてください。");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/lend.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
         } else {
             // 登録失敗
             request.setAttribute("errMsg", "登録できませんでした。すでに使用されているIDである可能性があります。");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/lend.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
         }
     }
 }

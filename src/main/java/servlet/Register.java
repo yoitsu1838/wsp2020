@@ -26,7 +26,8 @@ public class Register extends HttpServlet {
         boolean result = false;
         String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
 
-        result = UserManager.register(request, dbInfoPath);
+        UserManager um = new UserManager();
+        result = um.register(request, dbInfoPath);
 
         System.out.println("Register.java:" + result);
         if (result) {

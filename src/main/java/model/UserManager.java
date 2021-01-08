@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class UserManager {
 
-    public static boolean login(HttpServletRequest request, String dbInfoPath) {
+    public boolean login(HttpServletRequest request, String dbInfoPath) {
         User user = new User();
         UserDAO dao = new UserDAO();
 
@@ -15,6 +15,7 @@ public class UserManager {
 
         boolean result = false;
         try {
+
             result = dao.check(user, dbInfoPath);
 
         } catch (SQLException e) {
@@ -31,7 +32,7 @@ public class UserManager {
         return result;
     }
 
-    public static boolean register(HttpServletRequest request, String dbInfoPath) {
+    public boolean register(HttpServletRequest request, String dbInfoPath) {
         User user = new User();
         UserDAO dao = new UserDAO();
 

@@ -32,7 +32,8 @@ public class Login extends HttpServlet {
         boolean result = false;
         String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
 
-        result = UserManager.login(request, dbInfoPath);
+        UserManager um = new UserManager();
+        result = um.login(request, dbInfoPath);
 
         if (result) {
             // ログインに成功している場合は member.jsp へ

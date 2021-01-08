@@ -25,6 +25,8 @@ public class UserDAO {
 
         //servletContextをLogin.javaからもらって環境に合わせたdbのPATHを取得
 
+        boolean result = false;
+
         try {
             InputStream is = new FileInputStream(file);
             prop.load(is);
@@ -38,8 +40,9 @@ public class UserDAO {
         String password = prop.getProperty("pass"); // Postgre SQL password
         String url = prop.getProperty("dbName");
 
+
         // memberがDBにあるかどうかを調べる
-        boolean result = false;
+
         Connection connection;
         String sql = "select * from users where user_id=?";
 
@@ -48,8 +51,10 @@ public class UserDAO {
             connection = DriverManager.getConnection(url, usr, password);
             PreparedStatement pstmt = connection.prepareStatement(sql);
 
-            pstmt.setString(1, user.getUserId());
-            //pstmt.setString(2, user.getPassword());
+            String userId = user.getUserId();
+            if (userId=="") return false;
+            System.out.println("UserDAO.java:userId"+userId);
+            pstmt.setString(1, userId);
 
             ResultSet resultSet = pstmt.executeQuery();
             if (resultSet.next()) {

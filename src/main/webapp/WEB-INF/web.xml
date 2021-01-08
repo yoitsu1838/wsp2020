@@ -34,4 +34,16 @@
         <servlet-name>LendApprove</servlet-name>
         <url-pattern>/LendApprove</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ViewFriends</servlet-name>
+        <display-name>ViewFriends</display-name>
+        <description>frined_management</description>
+        <servlet-class>servlet.ViewFriends</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewFriends</servlet-name>
+        <url-pattern>/ViewFriends</url-pattern>
+    </servlet-mapping>
 </web-app>
