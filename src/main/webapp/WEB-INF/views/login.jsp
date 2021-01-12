@@ -24,7 +24,7 @@
 <header>
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark  orange darken-4">
+    <nav class="navbar navbar-expand-lg navbar-dark unique-color">
 
         <!-- Additional container -->
         <div class="container">
@@ -63,6 +63,7 @@
                 <% } %>
                 <!-- Default form login -->
                 <form class="text-center border border-light p-5" action="Login" method="POST">
+                    <p class="h4 mb-4">Login</p>
                     <!-- Email -->
                     <input type="text" name="id" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="ID">
 

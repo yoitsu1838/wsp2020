@@ -14,7 +14,7 @@ import model.User;
 import model.UserDAO;
 import model.UserManager;
 
-@WebServlet({"/login", "/"})
+@WebServlet({"/login","/Login"})
 public class Login extends HttpServlet {
 
     public Login() {
@@ -23,7 +23,7 @@ public class Login extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,8 +36,10 @@ public class Login extends HttpServlet {
         result = um.login(request, dbInfoPath);
 
         if (result) {
-            // ログインに成功している場合は member.jsp へ
-            getServletContext().getRequestDispatcher("/WEB-INF/views/member.jsp").forward(request, response);
+            // ログインに成功している場合
+            //DBから情報取得
+            //getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+            response.sendRedirect("/");
         } else {
             // ログインに失敗している場合は login.jsp へ
             request.setAttribute("errMsg", "ユーザ名またはパスワードが違います。");

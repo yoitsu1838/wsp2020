@@ -25,7 +25,7 @@ public class UserManager {
         HttpSession session = request.getSession();
         System.out.println(result);
         session.setAttribute("login", result); // セッションにログイン状態（true または false）を保存．
-        if (result){
+        if (result) {
             session.setAttribute("member", user);
         }
 
@@ -48,7 +48,7 @@ public class UserManager {
             e.printStackTrace();
         }
 
-       return result;
+        return result;
     }
 
 

@@ -1,14 +1,20 @@
+<%@ page import="model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <%
+        if (session.getAttribute("login") == null || !(Boolean) session.getAttribute("login")) {
+            response.sendRedirect("/Login");
+        }
+    %>
     <meta charset="UTF-8">
     <title>個人図書館システム</title>
 
     <!--  all -->
-    <meta name="robots" content="noindex" />
-    <meta name="robots" content="nofollow" />
+    <meta name="robots" content="noindex"/>
+    <meta name="robots" content="nofollow"/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -21,21 +27,64 @@
 </head>
 <body>
 
+
 <!--Main Navigation-->
 <header>
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark  orange darken-4">
+    <nav class="navbar navbar-expand-lg navbar-dark unique-color">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                個人図書館システム
+            </a>
+            <br>
+            <div class="animated-icon open">
+                <button class="navbar-toggler cross-button" type="button" data-toggle="collapse"
+                        data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
 
-        <!-- Additional container -->
-        <div class="container">
+                </button>
+            </div>
+            <!--Collapside-->
+            <div class="navbar-collapse collapse" id="basicExampleNav" style>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active hoverlink">
+                        <a class="nav-link" href="index.html">
+                            ホーム
+                        </a>
+                    </li>
+                    <li class="nav-item hoverlink">
+                        <a class="nav-link " href="lend.html">
+                            貸出承認
+                        </a>
+                    </li>
+                    <li class="nav-item hoverlink">
+                        <a class="nav-link" href="return.html">
+                            返却反映
+                        </a>
+                    </li>
+                    <li class="nav-item hoverlink">
+                        <a class="nav-link" href="friends.html">
+                            友人管理
+                        </a>
+                    </li>
+                    <li class="nav-item hoverlink">
+                        <a class="nav-link " href="removeLibrary.html">
+                            図書館削除
+                        </a>
+                    </li>
 
-            <!-- Navbar brand -->
-            <a class="navbar-brand" href="./">個人図書館管理システム</a>
-
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item hoverlink">
+                        <a class="nav-link" href="logout.html">
+                            ログアウト
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!-- Additional container -->
-
     </nav>
     <!--/.Navbar-->
 
@@ -46,41 +95,114 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <!--Grid row-->
+
+
+
+        <!--Grid row_[box]-->
         <div class="row">
-            <!--Grid column-->
-            <div class="col-lg-12 col-md-12 mb-4">
-                <h2>認証されていません</h2>
-                <hr>
-                <!-- Default form login -->
-                <form class="text-center border border-light p-5" action="Login" method="POST">
-
-                    <p class="h4 mb-4">Login</p>
-
-                    <!-- Email -->
-                    <input type="text" name="id" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="ID">
-
-                    <!-- Password -->
-                    <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-
-                    <div class="d-flex justify-content-around">
-                        ※パスワードを忘れた場合は、頑張って思い出してください。
+            <!--Grid column_[sidebar]-->
+            <div class="col-3 px-0 ">
+                <div class="sidebar_content border-right border-left border-bottom">
+                    <!--User-->
+                    <div class="card shadow-none mb-3">
+                        <div class="card-body border border-info"><a href="#myBooks"><h4 class="my-auto"><%= ((User) session.getAttribute("member")).getLibraryName()%></h4></a></div>
                     </div>
 
-                    <!-- Sign in button -->
-                    <button class="btn btn-info my-4" type="submit">ログイン</button>
-                    <a class="btn btn-default my-4　btn-sm" href="Register">新規登録</a>
+                    <!--friendsList-->
+                    <div class="card shadow-none">
+                        <div class="card-header bg-transparent border border-info">
+                            <h4 class="align-bottom my-auto">Friends</h4>
+                        </div>
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item">
+                                <a class="text-dark card-link" href="#">
+                                    friend1
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="text-dark card-link" href="#">
+                                    friend2
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="text-dark card-link"  href="#">
+                                    friend3
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- //Grid column_[sidebar]-->
 
-
-                </form>
-                <!-- Default form login -->
             </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
 
-    </div>
-    <!--Main container-->
+
+            <!--Grid column_[books]-->
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-sm-4 col-lg-3 pb-3">
+                        <div class="card">
+                            <div class="card-img-overlay py-0 px-1">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img class="card-img-top" height="180" src="#">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Title</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-warning" role="button">貸出中</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-3 pb-3">
+                        <div class="card">
+                            <div class="card-img-overlay py-0 px-1">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img class="card-img-top" height="180" src="#">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Title</li>
+                            </ul>
+                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-3 pb-3">
+                        <div class="card">
+                            <div class="card-img-overlay py-0 px-1">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img class="card-img-top" height="180" src="#">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Title</li>
+                            </ul>
+                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-3 pb-3">
+                        <div class="card">
+                            <div class="card-img-overlay py-0 px-1">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <img class="card-img-top" height="180" src="#">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Title</li>
+                            </ul>
+                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //Grid column_[books]-->
+
+        </div><!--//Grid row-->
+
+        </div>
+        <!-- //Main container-->
 </main>
 <!--Main layout-->
 
@@ -90,7 +212,8 @@
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 <!--  //all -->

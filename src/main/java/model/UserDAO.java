@@ -63,7 +63,7 @@ public class UserDAO {
                 String textPassword = user.getPassword();
                 //System.out.println("input:"+textPassword);
                 String encryptedPassword = resultSet.getString("user_pass");
-                // System.out.println("fromdb:+"+resultSet.getString("user_pass"));
+                 System.out.println("fromdb:+"+resultSet.getString("user_pass"));
 
                 if (encoder.matches(textPassword, encryptedPassword)) {
                     //System.out.println("matched");
@@ -72,6 +72,10 @@ public class UserDAO {
                     // System.out.println("mismatched");
                 }
 
+
+                System.out.println("mark");
+                user.setLibraryId(resultSet.getString("library_id"));
+                user.setLibraryName(resultSet.getString("library_name"));
             }
 
             resultSet.close();
@@ -138,6 +142,8 @@ public class UserDAO {
         }
         return result;
     }
+
+
 
     private boolean checkExitId(String userId, String usr, String url, String password) {
         boolean exitId = false;
