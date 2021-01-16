@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Lend">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/LendApprove">
                             貸出承認
                         </a>
                     </li>
