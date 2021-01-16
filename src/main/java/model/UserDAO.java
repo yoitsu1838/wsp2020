@@ -198,6 +198,7 @@ public class UserDAO {
             connection = DriverManager.getConnection(url, usr, password);
             PreparedStatement pstmt = connection.prepareStatement(sql);
 
+
             pstmt.setString(1, user.getUserId());
             //pstmt.setString(2, user.getPassword());
 

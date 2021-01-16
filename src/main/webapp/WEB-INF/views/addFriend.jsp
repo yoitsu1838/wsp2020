@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: yoitsu
-  Date: 2021/01/08
-  Time: 1:21
+  User: yude
+  Date: 2021/01/16
+  Time: 3:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -35,6 +35,7 @@
     </style>
 </head>
 <body>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark unique-color">
         <div class="container-fluid">
@@ -94,35 +95,35 @@
     <!--/.Navbar-->
 </header>
 
+
 <!--Main layout-->
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <h3 class="my-3">友人管理</h3>
-        <!--table-->
-        <table class="table text-center table-hover">
-            <thead>
-            <tr>
-                <th scope="col" style="width: 80%;">図書館名</th>
-                <th scope="col" style="width: 20%;">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td style="width: 80%;">山田A子</td>
-                <td class="table-danger" style="width: 20%;"><a href="#">削除</a></td>
-            </tr>
-            <tr>
-                <td style="width: 80%;">佐藤B子</td>
-                <td class="table-danger" style="width: 20%;"><a href="#">削除</a></td>
-            </tr>
-            <tr>
-                <td style="width: 80%;"></td>
-                <td class="table-info" style="width: 20%;"><a href="AddFriend">友人追加</a></td>
-            </tr>
-            </tbody>
-        </table>
-        <!--table closed-->
+        <h3 class="my-3">友人追加</h3>
+        <div class="text-center">
+            <h4>友人を追加する</h4>
+            <br>
+            <p>友人を追加するには下記URLを共有してください。<br>
+                URLにアクセスすることで、本の貸し借りを行うことがかのうになります。<br>
+                ※本の貸し借りを行う際にはお互いに登録しておく必要があります
+                ​</p>
+            <p>友人追加URL:<input type="text" id="userAddUrl" class="form-control"
+                              value="<%=(String)session.getAttribute("userAddUrl")%>" disabled></p>
+            <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3"
+                 data-url="<%=(String)session.getAttribute("userAddUrl")%>" data-color="default"
+                 data-size="small" data-count="false" style="display: none;"></div>
+            <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
+                    defer="defer"></script>
+
+            <br><br><br>
+
+            <button type="button" class="btn btn-outline-info" onclick="history.back()">戻る</button>
+
+
+        </div>
+
+
     </div>
 </main>
 
@@ -136,6 +137,5 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-
 </body>
 </html>

@@ -34,7 +34,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark unique-color">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 個人図書館システム
             </a>
             <br>
@@ -47,30 +47,30 @@
                 </button>
             </div>
             <!--Collapside-->
-            <div class="navbar-collapse collapse" id="basicExampleNav" style>
+            <div class="navbar-collapse collapse show" id="basicExampleNav" style>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active hoverlink">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link waves-effect waves-light" href="/">
                             ホーム
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link " href="lend.html">
+                        <a class="nav-link waves-effect waves-light" href="/Lend">
                             貸出承認
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link" href="return.html">
+                        <a class="nav-link waves-effect waves-light" href="/Return">
                             返却反映
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link" href="friends.html">
+                        <a class="nav-link waves-effect waves-light" href="/ViewFriends">
                             友人管理
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link " href="removeLibrary.html">
+                        <a class="nav-link waves-effect waves-light" href="/RemoveLibrary">
                             図書館削除
                         </a>
                     </li>
@@ -78,12 +78,13 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item hoverlink">
-                        <a class="nav-link" href="logout.html">
+                        <a class="nav-link waves-effect waves-light" href="/Logout">
                             ログアウト
                         </a>
                     </li>
                 </ul>
             </div>
+            <!--//Collapside-->
         </div>
     </nav>
     <!--/.Navbar-->
@@ -97,7 +98,6 @@
     <div class="container">
 
 
-
         <!--Grid row_[box]-->
         <div class="row">
             <!--Grid column_[sidebar]-->
@@ -105,7 +105,11 @@
                 <div class="sidebar_content border-right border-left border-bottom">
                     <!--User-->
                     <div class="card shadow-none mb-3">
-                        <div class="card-body border border-info"><a href="#myBooks"><h4 class="my-auto"><%= ((User) session.getAttribute("member")).getLibraryName()%></h4></a></div>
+                        <div class="card-body border border-info"><a href="#myBooks"><h4 class="my-auto">
+                            <% if (!(session.getAttribute("member") == null)) {
+                                out.print(((User) session.getAttribute("member")).getLibraryName());
+                            } %>
+                        </h4></a></div>
                     </div>
 
                     <!--friendsList-->
@@ -125,7 +129,7 @@
                                 </a>
                             </li>
                             <li class="list-group-item">
-                                <a class="text-dark card-link"  href="#">
+                                <a class="text-dark card-link" href="#">
                                     friend3
                                 </a>
                             </li>
@@ -201,8 +205,8 @@
 
         </div><!--//Grid row-->
 
-        </div>
-        <!-- //Main container-->
+    </div>
+    <!-- //Main container-->
 </main>
 <!--Main layout-->
 

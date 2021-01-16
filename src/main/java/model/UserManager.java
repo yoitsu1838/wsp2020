@@ -52,5 +52,16 @@ public class UserManager {
     }
 
 
+    public void getUserAddUrl(HttpServletRequest request) {
+        String libId;
+        HttpSession session = request.getSession();
+        libId = ((User) session.getAttribute("member")).getLibraryId();
+        String addUrl = request.getRequestURL() + "?method=fad&uid=" + libId;
+        System.out.println(addUrl);
+
+        session.setAttribute("userAddUrl", addUrl);
+
+    }
+
 
 }

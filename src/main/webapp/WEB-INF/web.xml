@@ -37,4 +37,14 @@
         <servlet-name>ViewFriends</servlet-name>
         <url-pattern>/ViewFriends</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddFriend</servlet-name>
+        <display-name>AddFriend</display-name>
+        <description>display_Adding URL</description>
+        <servlet-class>servlet.AddFriend</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddFriend</servlet-name>
+        <url-pattern>/AddFriend</url-pattern>
+    </servlet-mapping>
 </web-app>
