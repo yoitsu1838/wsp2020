@@ -10,7 +10,7 @@
 <head>
     <%
         if (session.getAttribute("login") == null || !(Boolean) session.getAttribute("login")) {
-            response.sendRedirect("/Login");
+            response.sendRedirect(request.getContextPath() + "/Login");
         }
     %>
     <meta charset="utf-8">
@@ -54,27 +54,27 @@
             <div class="navbar-collapse collapse show" id="basicExampleNav" style>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/">
                             ホーム
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Lend">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Lend">
                             貸出承認
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Return">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Return">
                             返却反映
                         </a>
                     </li>
                     <li class="nav-item active hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/ViewFriends">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/ViewFriends">
                             友人管理
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/RemoveLibrary">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/RemoveLibrary">
                             図書館削除
                         </a>
                     </li>

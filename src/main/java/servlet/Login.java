@@ -14,7 +14,7 @@ import model.User;
 import model.UserDAO;
 import model.UserManager;
 
-@WebServlet({"/login","/Login"})
+@WebServlet({"/login", "/Login"})
 public class Login extends HttpServlet {
 
     public Login() {
@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
             // ログインに成功している場合
             //DBから情報取得
             //getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
-            response.sendRedirect("/");
+            response.sendRedirect(request.getContextPath() + "/");
         } else {
             // ログインに失敗している場合は login.jsp へ
             request.setAttribute("errMsg", "ユーザ名またはパスワードが違います。");

@@ -6,7 +6,7 @@
 <head>
     <%
         if (session.getAttribute("login") == null || !(Boolean) session.getAttribute("login")) {
-            response.sendRedirect("/Login");
+            response.sendRedirect(request.getContextPath() +"/Login");
         }
     %>
     <meta charset="UTF-8">
@@ -34,7 +34,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark unique-color">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="<%=request.getContextPath() %>/">
                 個人図書館システム
             </a>
             <br>
@@ -50,27 +50,27 @@
             <div class="navbar-collapse collapse show" id="basicExampleNav" style>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/">
                             ホーム
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Lend">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Lend">
                             貸出承認
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Return">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Return">
                             返却反映
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/ViewFriends">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/ViewFriends">
                             友人管理
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/RemoveLibrary">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/RemoveLibrary">
                             図書館削除
                         </a>
                     </li>
@@ -78,7 +78,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Logout">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Logout">
                             ログアウト
                         </a>
                     </li>
