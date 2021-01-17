@@ -52,7 +52,7 @@ public class UserManager {
     }
 
     public boolean cancellation(HttpServletRequest request, String dbInfoPath) {
-        User user ;
+        User user;
         UserDAO dao = new UserDAO();
         HttpSession session = request.getSession();
 
@@ -85,6 +85,20 @@ public class UserManager {
 
         session.setAttribute("userAddUrl", addUrl);
 
+    }
+
+    public String getLibraryName(String libId, String dbInfoPath) {
+        String libName = null;
+
+        UserDAO dao = new UserDAO();
+        try {
+            libName = dao.getLibraryName(libId, dbInfoPath);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        System.out.println("um:"+libName);
+        return libName;
     }
 
 

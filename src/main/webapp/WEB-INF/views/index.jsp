@@ -96,7 +96,14 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-
+        <% String errMsg = (String)request.getAttribute("errMsg");%>
+        <% if (errMsg!=null){ %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %></div>
+        <% } %>
+        <% String message = (String)request.getAttribute("message");%>
+        <% if (message!=null){ %>
+        <div class="alert alert-success" role="alert"><%= message %></div>
+        <% } %>
 
         <!--Grid row_[box]-->
         <div class="row">

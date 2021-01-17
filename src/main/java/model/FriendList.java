@@ -1,0 +1,19 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FriendList {
+
+    List<Friend> list = new ArrayList<Friend>();
+
+    public void addFriendForList(Friend friend){
+        list.add(friend);
+    }
+
+    public List<Friend> getList() {
+        return list;
+    }
+
+
+}

@@ -1,12 +1,18 @@
 package servlet;
 
+import model.Friend;
+import model.FriendList;
+import model.FriendManager;
 import model.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewFriends extends HttpServlet {
 
@@ -15,28 +21,33 @@ public class ViewFriends extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
+        HttpSession session = request.getSession();
+        if ((session.getAttribute("member")) == null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+        }
 
+        FriendManager fm = new FriendManager();
+        UserManager um = new UserManager();
+        FriendList friendList = fm.loadFriends(request, dbInfoPath);
+        List<Friend> list;
+        List<String> friendLibNames = new ArrayList<String>();
+        list = friendList.getList();
+        for (Friend friend : list) {
+            String libName = um.getLibraryName(friend.getFriendLibraryId(), dbInfoPath);
+            System.out.println("libnameForadd:" + libName);
+            friendLibNames.add(libName);
+        }
+
+        request.setAttribute("friendNameList", friendLibNames);
         getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        boolean result = false;
-        String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
+        this.doGet(request, response);
 
-        UserManager um = new UserManager();
-        result = um.register(request, dbInfoPath);
-
-        System.out.println("Register.java:" + result);
-        if (result) {
-            // 登録成功
-            request.setAttribute("message", "登録が完了しました。ログインしてください。");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
-        } else {
-            // 登録失敗
-            request.setAttribute("errMsg", "登録できませんでした。すでに使用されているIDである可能性があります。");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
-        }
     }
 }

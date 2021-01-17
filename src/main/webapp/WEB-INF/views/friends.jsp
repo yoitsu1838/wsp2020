@@ -1,4 +1,5 @@
-<%--
+<%@ page import="model.FriendList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: yoitsu
   Date: 2021/01/08
@@ -74,7 +75,8 @@
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/RemoveLibrary">
+                        <a class="nav-link waves-effect waves-light"
+                           href="<%=request.getContextPath() %>/RemoveLibrary">
                             図書館削除
                         </a>
                     </li>
@@ -101,21 +103,21 @@
         <h3 class="my-3">友人管理</h3>
         <!--table-->
         <table class="table text-center table-hover">
-            <thead>
+            <thead class="black white-text">
             <tr>
                 <th scope="col" style="width: 80%;">図書館名</th>
                 <th scope="col" style="width: 20%;">操作</th>
             </tr>
             </thead>
             <tbody>
+            <% List<String> nameList = (List<String>) request.getAttribute("friendNameList"); %>
+            <% for (String libName : nameList) { %>
             <tr>
-                <td style="width: 80%;">山田A子</td>
+                <td style="width: 80%;"><%= libName %>
+                </td>
                 <td class="table-danger" style="width: 20%;"><a href="#">削除</a></td>
             </tr>
-            <tr>
-                <td style="width: 80%;">佐藤B子</td>
-                <td class="table-danger" style="width: 20%;"><a href="#">削除</a></td>
-            </tr>
+            <% } %>
             <tr>
                 <td style="width: 80%;"></td>
                 <td class="table-info" style="width: 20%;"><a href="AddFriend">友人追加</a></td>

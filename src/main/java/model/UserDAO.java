@@ -87,6 +87,48 @@ public class UserDAO {
     }
 
 
+    public String getLibraryName(String libId, String file) throws SQLException {
+        String libName = null;
+        boolean result = false;
+
+        try {
+            InputStream is = new FileInputStream(file);
+            prop.load(is);
+            is.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        String usr = prop.getProperty("usr");     // Postgre SQL user name
+        String password = prop.getProperty("pass"); // Postgre SQL password
+        String url = prop.getProperty("dbName");
+
+        Connection connection;
+        String sql = "select * from users where library_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+            pstmt.setString(1, libId);
+
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                libName = resultSet.getString("library_name");
+                System.out.println("libname:" + libName);
+            }
+
+            resultSet.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return libName;
+    }
+
+
     public boolean register(User user, String file) throws SQLException {
         boolean result = false;
         boolean exitId = false;
@@ -227,19 +269,12 @@ public class UserDAO {
             }
 
             resultSet.close();
-
-
-
-
-
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
-
-
 
 
 }
