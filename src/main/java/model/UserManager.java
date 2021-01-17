@@ -56,7 +56,13 @@ public class UserManager {
         String libId;
         HttpSession session = request.getSession();
         libId = ((User) session.getAttribute("member")).getLibraryId();
-        String addUrl = request.getRequestURL() + "?method=fad&uid=" + libId;
+        String addUrl;
+        System.out.println(request.getServerName());
+        if (!(request.getServerName().equals("localhost"))) {
+            addUrl = "https://wsp2020.yoitsu.dev" + request.getRequestURI() + "?method=fad&uid=" + libId;
+        } else {
+            addUrl = request.getRequestURL() + "?method=fad&uid=" + libId;
+        }
         System.out.println(addUrl);
 
         session.setAttribute("userAddUrl", addUrl);

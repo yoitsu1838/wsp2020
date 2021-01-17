@@ -38,20 +38,20 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark unique-color">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="<%=request.getContextPath() %>/">
                 個人図書館システム
             </a>
             <br>
             <div class="animated-icon open">
                 <button class="navbar-toggler cross-button" type="button" data-toggle="collapse"
-                        data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="true"
+                        data-target="#libNav" aria-controls="libNav" aria-expanded="true"
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
 
                 </button>
             </div>
             <!--Collapside-->
-            <div class="navbar-collapse collapse show" id="basicExampleNav" style>
+            <div class="navbar-collapse collapse" id="libNav" style>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item hoverlink">
                         <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/">

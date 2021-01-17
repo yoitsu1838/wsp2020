@@ -37,6 +37,7 @@
         <servlet-name>ViewFriends</servlet-name>
         <url-pattern>/ViewFriends</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>AddFriend</servlet-name>
         <display-name>AddFriend</display-name>
@@ -47,4 +48,27 @@
         <servlet-name>AddFriend</servlet-name>
         <url-pattern>/AddFriend</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RemoveLibrary</servlet-name>
+        <display-name>RemoveLibrary</display-name>
+        <description>RemoveLibrary</description>
+        <servlet-class>servlet.RemoveLibrary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveLibrary</servlet-name>
+        <url-pattern>/RemoveLibrary</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Return</servlet-name>
+        <display-name>Return</display-name>
+        <description>Return</description>
+        <servlet-class>servlet.Return</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Return</servlet-name>
+        <url-pattern>/Return</url-pattern>
+    </servlet-mapping>
+
 </web-app>
