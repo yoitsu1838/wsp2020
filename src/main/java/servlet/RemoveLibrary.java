@@ -1,5 +1,7 @@
 package servlet;
 
+import model.UserManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,12 +16,26 @@ public class RemoveLibrary extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/views/RemoveLibrary.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/removeLibrary.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        boolean result = false;
+        String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/RemoveLibrary.jsp").forward(request, response);
+        UserManager um = new UserManager();
+
+        if (request.getParameter("method").equals("executeDel")) {
+            result = um.cancellation(request, dbInfoPath);
+            if (result) {
+
+                session.invalidate();
+                getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            }
+        }
+        getServletContext().getRequestDispatcher("/WEB-INF/views/removeLibrary.jsp").forward(request, response);
     }
 }

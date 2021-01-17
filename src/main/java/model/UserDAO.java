@@ -52,8 +52,8 @@ public class UserDAO {
             PreparedStatement pstmt = connection.prepareStatement(sql);
 
             String userId = user.getUserId();
-            if (userId=="") return false;
-            System.out.println("UserDAO.java:userId"+userId);
+            if (userId == "") return false;
+            System.out.println("UserDAO.java:userId" + userId);
             pstmt.setString(1, userId);
 
             ResultSet resultSet = pstmt.executeQuery();
@@ -63,7 +63,7 @@ public class UserDAO {
                 String textPassword = user.getPassword();
                 //System.out.println("input:"+textPassword);
                 String encryptedPassword = resultSet.getString("user_pass");
-                 System.out.println("fromdb:+"+resultSet.getString("user_pass"));
+                System.out.println("fromdb:+" + resultSet.getString("user_pass"));
 
                 if (encoder.matches(textPassword, encryptedPassword)) {
                     //System.out.println("matched");
@@ -144,7 +144,6 @@ public class UserDAO {
     }
 
 
-
     private boolean checkExitId(String userId, String usr, String url, String password) {
         boolean exitId = false;
         Connection connection;
@@ -172,9 +171,8 @@ public class UserDAO {
     }
 
 
-    public boolean cancellation(User user, ServletContext servletContext) throws SQLException {
-        //servletContextをLogin.javaからもらって環境に合わせたdbのPATHを取得
-        String file = servletContext.getRealPath("WEB-INF/config.properties");
+    public boolean cancellation(User user, String file) throws SQLException {
+        boolean result = false;
         try {
             InputStream is = new FileInputStream(file);
             prop.load(is);
@@ -189,44 +187,59 @@ public class UserDAO {
         String url = prop.getProperty("dbName");
 
         // memberがDBにあるかどうかを調べる
-        boolean result = false;
+
+        //TODO Exceptionの解決
+
         Connection connection;
         String sql = "select * from users where user_id=?";
+        String delSql = "DELETE from users where user_id=?";
+        String ckStatusSql = "SELECT is_lending from users where library_id=? and isbn=?";
 
         try {
             Class.forName(driverClassName);
             connection = DriverManager.getConnection(url, usr, password);
             PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt2 = connection.prepareStatement(delSql);
 
-
-            pstmt.setString(1, user.getUserId());
-            //pstmt.setString(2, user.getPassword());
+            String userId = user.getUserId();
+            if (userId == "") return false;
+            pstmt.setString(1, userId);
+            pstmt2.setString(1, userId);
 
             ResultSet resultSet = pstmt.executeQuery();
             if (resultSet.next()) {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
                 String textPassword = user.getPassword();
-                //System.out.println("input:"+textPassword);
                 String encryptedPassword = resultSet.getString("user_pass");
-                // System.out.println("fromdb:+"+resultSet.getString("user_pass"));
-
                 if (encoder.matches(textPassword, encryptedPassword)) {
                     //System.out.println("matched");
                     result = true;
                 } else {
                     // System.out.println("mismatched");
                 }
+            }
 
+            if (result) {
+                System.out.println("mark:" + delSql);
+                ResultSet resultSet2 = pstmt2.executeQuery();
+                System.out.println(resultSet2);
             }
 
             resultSet.close();
+
+
+
+
+
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
+
+
 
 
 }

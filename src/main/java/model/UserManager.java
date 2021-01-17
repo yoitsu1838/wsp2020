@@ -51,6 +51,24 @@ public class UserManager {
         return result;
     }
 
+    public boolean cancellation(HttpServletRequest request, String dbInfoPath) {
+        User user ;
+        UserDAO dao = new UserDAO();
+        HttpSession session = request.getSession();
+
+        user = (User) session.getAttribute("member");
+
+        boolean result = false;
+        try {
+            result = dao.cancellation(user, dbInfoPath);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 
     public void getUserAddUrl(HttpServletRequest request) {
         String libId;
