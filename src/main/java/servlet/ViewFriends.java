@@ -33,21 +33,39 @@ public class ViewFriends extends HttpServlet {
         FriendList friendList = fm.loadFriends(request, dbInfoPath);
         List<Friend> list;
         List<String> friendLibNames = new ArrayList<String>();
+        List<String> friendLibIds = new ArrayList<String>();
         list = friendList.getList();
         for (Friend friend : list) {
-            String libName = um.getLibraryName(friend.getFriendLibraryId(), dbInfoPath);
-            System.out.println("libnameForadd:" + libName);
+            String libId = friend.getFriendLibraryId();
+            String libName = um.getLibraryName(libId, dbInfoPath);
             friendLibNames.add(libName);
+            friendLibIds.add(libId);
         }
 
         request.setAttribute("friendNameList", friendLibNames);
+        request.setAttribute("friendlist", friendLibIds);
         getServletContext().getRequestDispatcher("/WEB-INF/views/friends.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        this.doGet(request, response);
 
+        HttpSession session = request.getSession();
+
+        String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
+
+
+        FriendManager fm = new FriendManager();
+
+        if (request.getParameter("friendLibId") != null) {
+            fm.deleteFriend(request, dbInfoPath);
+
+            request.setAttribute("message", "友人登録を削除しました。");
+            getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+
+        }
+
+        this.doGet(request, response);
     }
 }

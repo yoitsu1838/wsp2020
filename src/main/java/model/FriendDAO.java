@@ -154,4 +154,52 @@ public class FriendDAO {
         return friendList;
     }
 
+
+    public boolean deleteFriend(User user, String target, String file) throws SQLException {
+        boolean result = false;
+        try {
+            InputStream is = new FileInputStream(file);
+            prop.load(is);
+            is.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        String usr = prop.getProperty("usr");     // Postgre SQL user name
+        String password = prop.getProperty("pass"); // Postgre SQL password
+        String url = prop.getProperty("dbName");
+
+        // memberがDBにあるかどうかを調べる
+
+        //TODO Exceptionの解決
+
+        Connection connection;
+        String delSql = "DELETE from friends where library_id=? AND friends_library_key=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(delSql);
+
+            String userLibId = user.getLibraryId();
+            pstmt.setString(1, userLibId);
+            pstmt.setString(2, target);
+
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+
+                result = true;
+
+            }
+
+
+            resultSet.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

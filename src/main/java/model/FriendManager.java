@@ -74,5 +74,22 @@ public class FriendManager {
 
     }
 
+    public void deleteFriend(HttpServletRequest request, String dbInfoPath) {
+        String targetForDelete = request.getParameter("friendLibId");
+        System.out.println("target:" + targetForDelete);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("member");
+
+        FriendDAO dao = new FriendDAO();
+        try {
+            dao.deleteFriend(user, targetForDelete, dbInfoPath);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
+
 
 }

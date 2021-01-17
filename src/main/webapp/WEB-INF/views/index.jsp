@@ -1,4 +1,5 @@
 <%@ page import="model.User" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -6,7 +7,7 @@
 <head>
     <%
         if (session.getAttribute("login") == null || !(Boolean) session.getAttribute("login")) {
-            response.sendRedirect(request.getContextPath() +"/Login");
+            response.sendRedirect(request.getContextPath() + "/Login");
         }
     %>
     <meta charset="UTF-8">
@@ -70,7 +71,8 @@
                         </a>
                     </li>
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/RemoveLibrary">
+                        <a class="nav-link waves-effect waves-light"
+                           href="<%=request.getContextPath() %>/RemoveLibrary">
                             図書館削除
                         </a>
                     </li>
@@ -96,13 +98,15 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <% String errMsg = (String)request.getAttribute("errMsg");%>
-        <% if (errMsg!=null){ %>
-        <div class="alert alert-danger" role="alert"><%= errMsg %></div>
+        <% String errMsg = (String) request.getAttribute("errMsg");%>
+        <% if (errMsg != null) { %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %>
+        </div>
         <% } %>
-        <% String message = (String)request.getAttribute("message");%>
-        <% if (message!=null){ %>
-        <div class="alert alert-success" role="alert"><%= message %></div>
+        <% String message = (String) request.getAttribute("message");%>
+        <% if (message != null) { %>
+        <div class="alert alert-success" role="alert"><%= message %>
+        </div>
         <% } %>
 
         <!--Grid row_[box]-->
@@ -124,22 +128,27 @@
                         <div class="card-header bg-transparent border border-info">
                             <h4 class="align-bottom my-auto">Friends</h4>
                         </div>
+                        <% List<String> nameList = (List<String>) request.getAttribute("friendNameList"); %>
+                        <% List<String> friendList = (List<String>) request.getAttribute("friendlist"); %>
                         <ul class="list-group list-group-flush ">
-                            <li class="list-group-item">
-                                <a class="text-dark card-link" href="#">
-                                    friend1
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a class="text-dark card-link" href="#">
-                                    friend2
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a class="text-dark card-link" href="#">
-                                    friend3
-                                </a>
-                            </li>
+                            <%
+                                int count = 0;
+                                for (String libName : nameList) {
+                            %>
+                            <form action="ViewFriends" name="form1" method="POST">
+                                <li class="list-group-item">
+                                    <input type="hidden" name="friendLibId"
+                                           value="<%= friendList.get(count)%>"/>
+                                    <a class="text-dark card-link" href="#">
+                                        <%= libName %>
+                                    </a>
+                                </li>
+                            </form>
+                            <%
+                                    count++;
+                                }
+                            %>
+
                         </ul>
                     </div>
                 </div><!-- //Grid column_[sidebar]-->

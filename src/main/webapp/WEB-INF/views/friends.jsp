@@ -1,5 +1,6 @@
 <%@ page import="model.FriendList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="model.Friend" %><%--
   Created by IntelliJ IDEA.
   User: yoitsu
   Date: 2021/01/08
@@ -100,6 +101,14 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
+        <% String errMsg = (String)request.getAttribute("errMsg");%>
+        <% if (errMsg!=null){ %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %></div>
+        <% } %>
+        <% String message = (String)request.getAttribute("message");%>
+        <% if (message!=null){ %>
+        <div class="alert alert-success" role="alert"><%= message %></div>
+        <% } %>
         <h3 class="my-3">友人管理</h3>
         <!--table-->
         <table class="table text-center table-hover">
@@ -111,13 +120,27 @@
             </thead>
             <tbody>
             <% List<String> nameList = (List<String>) request.getAttribute("friendNameList"); %>
-            <% for (String libName : nameList) { %>
+            <% List<String> friendList = (List<String>) request.getAttribute("friendlist");
+                int count = 0;
+            %>
+            <% for (String libName : nameList) {
+                System.out.println(friendList.get(count));%>
             <tr>
                 <td style="width: 80%;"><%= libName %>
                 </td>
-                <td class="table-danger" style="width: 20%;"><a href="#">削除</a></td>
+                <form action="ViewFriends" name="form1" method="POST">
+                <td class="table-danger" style="width: 20%;">
+
+                        <input type="hidden" name="friendLibId"
+                               value="<%= friendList.get(count)%>"/>
+                        <a href="javascript:form1.submit()">削除する</a>
+
+                </td>
+                </form>
             </tr>
-            <% } %>
+            <%
+                    count++;
+                } %>
             <tr>
                 <td style="width: 80%;"></td>
                 <td class="table-info" style="width: 20%;"><a href="AddFriend">友人追加</a></td>
