@@ -71,4 +71,15 @@
         <url-pattern>/Return</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RemoveBook</servlet-name>
+        <display-name>RemoveBook</display-name>
+        <description>RemoveBook</description>
+        <servlet-class>servlet.RemoveBook</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveBook</servlet-name>
+        <url-pattern>/RemoveBook</url-pattern>
+    </servlet-mapping>
+
 </web-app>

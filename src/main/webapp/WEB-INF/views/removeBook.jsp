@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: yoitsu
-  Date: 2021/01/08
-  Time: 1:21
+  Date: 2021/01/17
+  Time: 22:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -101,46 +101,34 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
+        <h3 class="my-3">本削除</h3>
+        <div class="text-center">
+            <h4>この本を削除しますか？</h4>
+            <br>
+            <table class="table text-center table-hover m-auto" style="width: 50%;">
+                <tbody>
+                <tr>
+                    <th scope="row">タイトル</th>
+                    <td>title</td>
+                </tr>
+                <tr>
+                    <th scope="row">作者</th>
+                    <td>auther</td>
+                </tr>
+                <tr>
+                    <th scope="row">巻数</th>
+                    <td>number</td>
+                </tr>
+                <tr>
+                    <th scope="row">備考</th>
+                    <td>text</td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-outline-info">削除する</button>
+            <button type="button" class="btn btn-outline-info">キャンセル</button>
 
-        <h3 class="my-3">貸出承認</h3>
-        <!--table-->
-        <table class="table text-center table-hover">
-            <thead class="black white-text">
-            <tr>
-                <th scope="col">受付日付</th>
-                <th scope="col">本タイトル</th>
-                <th scope="col">名前</th>
-                <th scope="col" colspan="2">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">yy-mm-dd</th>
-                <td>あいうえお</td>
-                <td>山田A子</td>
-                <td class="table-info">
-                    <a href="#">承認</a>
-                </td>
-                <td class="table-warning">
-                    <a href="#">拒否</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">yy-mm-dd</th>
-                <td>かきくけこ</td>
-                <td>佐藤B子</td>
-                <td class="table-info">
-                    <a href="#">承認</a>
-                </td>
-                <td class="table-warning">
-                    <a href="#">拒否</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <!--table closed-->
-
-    </div>
+        </div>
 </main>
 
 
