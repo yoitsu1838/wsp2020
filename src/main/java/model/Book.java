@@ -1,7 +1,7 @@
 package model;
 
 public class Book {
-    private String isbn;
+    private String isbn;//ユーザが入力したものについてはisbnにUUIDを代入する
     private String title;
     private String titleKana;
     private String publisherName;

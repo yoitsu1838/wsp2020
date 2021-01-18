@@ -1,9 +1,6 @@
 package servlet;
 
-import model.Friend;
-import model.FriendList;
-import model.FriendManager;
-import model.UserManager;
+import model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +27,7 @@ public class Toppage extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
 
+        //友人一覧を取得
         FriendManager fm = new FriendManager();
         UserManager um = new UserManager();
         FriendList friendList = fm.loadFriends(request, dbInfoPath);
@@ -44,8 +42,24 @@ public class Toppage extends HttpServlet {
             friendLibIds.add(libId);
         }
 
+        //自分の本を取得
+        CollectionManager cm = new CollectionManager(dbInfoPath);
+        User user = (User) session.getAttribute("member");
+        CollectionList cList = cm.getCollections(user.getLibraryId());
+        //collectionListからBookInfoを取得
+        BookManager bm = new BookManager(dbInfoPath);
+        BookList bList = new BookList();
+        for (int i = 0; i < cList.size(); i++) {
+            Book book = bm.getBookInfoFromDb(cList.getList().get(i).getBookId());
+            bList.addBookForList(book);
+        }
+
+        //set
         request.setAttribute("friendNameList", friendLibNames);
         request.setAttribute("friendlist", friendLibIds);
+        request.setAttribute("collectionlist", cList);
+        request.setAttribute("booklist", bList);
+
 
         getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
     }

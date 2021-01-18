@@ -5,7 +5,7 @@ import java.util.List;
 
 public class FriendList {
 
-    List<Friend> list = new ArrayList<Friend>();
+    private List<Friend> list = new ArrayList<Friend>();
 
     public void addFriendForList(Friend friend){
         list.add(friend);

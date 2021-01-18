@@ -43,43 +43,81 @@
         <h3 class="my-3">本登録</h3>
         <div class="text-center">
             <br>
-            <a href="<%=request.getContextPath() %>/SearchBook?method=isbn" >本を探す</a>
+            <div id="searchLink" class="mb-4"><a class="btn btn-lg btn-indigo"
+                                                 href="<%=request.getContextPath() %>/SearchBook?method=isbn">本を探す</a>
+            </div>
+
             <br>
             <h4>本が見つからない場合</h4>
-            <form action="AddBook" method="POST">
-                <div class="form-group row">
-                    <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTitle" placeholder="タイトル" required></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputAuther" class="col-sm-2 col-form-label">作者</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputAuther" placeholder="作者" required></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputNumber" class="col-sm-2 col-form-label">巻数</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputNumber" placeholder="巻数"></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2">表紙</label>
-                    <div class="col-sm-10 text-left">
-                        ※現在表紙を登録できません。
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputOther" class="col-sm-2 col-form-label">備考</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputOther" placeholder="備考"></input>
-                    </div>
-                </div>
+            <!-- Collapse buttons -->
+            <div class="pb-4">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseElement" aria-expanded="false"
+                   aria-controls="collapseElement" onclick="clickBtn()">
+                    本情報をシステムに登録する
+                </a>
 
-            </form>
-            <button type="submit" class="btn btn-outline-info">追加する</button>
+                <script>
+                    //本を探すボタン
+                    document.getElementById("searchLink").style.display = "block";
+
+                    function clickBtn() {
+                        const searchLink = document.getElementById("searchLink");
+
+                        if (searchLink.style.display == "block") {
+                            // noneで非表示
+                            searchLink.style.display = "none";
+                        } else {
+                            // blockで表示
+                            searchLink.style.display = "block";
+                        }
+                    }
+
+                </script>
+            </div>
+
+            <!-- / Collapse buttons -->
+
+            <!-- Collapsible element -->
+            <div class="collapse" id="collapseElement">
+                <form action="AddBook" method="POST">
+                    <div class="form-group row">
+                        <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="title" class="form-control" id="inputTitle" placeholder="タイトル" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputAuther" class="col-sm-2 col-form-label">作者</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="author" class="form-control" id="inputAuther" placeholder="作者" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputNumber" class="col-sm-2 col-form-label">巻数</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputNumber" placeholder="巻数"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2">表紙</label>
+                        <div class="col-sm-10 text-left">
+                            ※現在表紙を登録できません。
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputOther" class="col-sm-2 col-form-label">備考</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="remark" class="form-control" id="inputOther" placeholder="備考"/>
+                        </div>
+                    </div>
+
+                    <a class="btn btn-outline-blue-grey"
+                       href="<%=request.getContextPath() %>/SearchBook?method=isbn">本を探す</a>
+                    <button type="submit" class="btn btn-outline-info">追加する</button>
+
+                </form>
+            </div>
+
 
         </div>
     </div>

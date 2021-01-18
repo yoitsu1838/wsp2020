@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BookList {
 
-    List<Book> list = new ArrayList<>();
+    private List<Book> list = new ArrayList<>();
 
     public void addBookForList(Book book){
         list.add(book);

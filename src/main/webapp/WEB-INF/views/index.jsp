@@ -1,5 +1,5 @@
-<%@ page import="model.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -206,7 +206,17 @@
 
             <!--Grid column_[books]-->
             <div class="col-9">
+                <%
+                    CollectionList cList = (CollectionList) request.getAttribute("collectionlist");
+                    BookList bList = (BookList) request.getAttribute("booklist");
+                %>
+
                 <div class="row">
+                    <%
+                        for (int i = 0; i < cList.size(); i++) {
+                            Collection collection = cList.getList().get(i);
+                            Book book = bList.getList().get(i);
+                    %>
                     <div class="col-sm-4 col-lg-3 pb-3">
                         <div class="card">
                             <div class="card-img-overlay py-0 px-1">
@@ -214,56 +224,39 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <img class="card-img-top" height="180" src="#">
+                            <%
+                                if (book.getPic_path() == null) {
+                            %>
+                            <img class="card-img-top" height="200px"
+                                 src="<%=request.getContextPath() +"/assets/images/no_image_tate.jpg"%>">
+                            <%
+                            } else {
+                            %>
+                            <img class="card-img-top" height="200px" src="<%=book.getPic_path()%>">
+                            <%
+                                }
+                            %>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Title</li>
+                                <li class="list-group-item"><%=book.getTitle()%>
+                                </li>
                             </ul>
+                            <%
+                                if (collection.getIsLending()) {
+                            %>
                             <a href="#" class="btn btn-outline-warning" role="button">貸出中</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3 pb-3">
-                        <div class="card">
-                            <div class="card-img-overlay py-0 px-1">
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <img class="card-img-top" height="180" src="#">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Title</li>
-                            </ul>
+                            <% } else { %>
                             <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-lg-3 pb-3">
-                        <div class="card">
-                            <div class="card-img-overlay py-0 px-1">
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <img class="card-img-top" height="180" src="#">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Title</li>
-                            </ul>
-                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-lg-3 pb-3">
-                        <div class="card">
-                            <div class="card-img-overlay py-0 px-1">
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <img class="card-img-top" height="180" src="#">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Title</li>
-                            </ul>
-                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
-                        </div>
-                    </div>
+                    <%
+                        }
+                    %>
+
                 </div>
+
             </div>
             <!-- //Grid column_[books]-->
 

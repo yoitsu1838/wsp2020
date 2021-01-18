@@ -1,6 +1,5 @@
 package model;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -78,7 +77,6 @@ public class FriendDAO {
         String url = prop.getProperty("dbName");
 
 
-        // memberがDBにあるかどうかを調べる
 
         Connection connection;
         String sql = "SELECT * FROM friends WHERE library_id=? AND friends_library_key=?";

@@ -5,13 +5,16 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class BookManager {
     final private static Properties prop = new Properties();
     private String rakutenAPIapplicationId = null;
+    private String dbfilePath;
 
     public BookManager(String file) {
+        dbfilePath = file;
         try {
             InputStream is = new FileInputStream(file);
             prop.load(is);
@@ -23,7 +26,7 @@ public class BookManager {
         rakutenAPIapplicationId = prop.getProperty("rakutenAPIapplicationId");
     }
 
-    //BookInfo取得
+    //BookInfo取得 FROM API
     public Book getBookInfoFromRakutenAPI(String isbn) throws IOException {
         System.out.println("run:getBookInfoFromRakutenAPI");
         Book book = new Book();
@@ -52,6 +55,7 @@ public class BookManager {
         book.setPublisherName(publisherName);
         book.setSalesDate(salesDate);
         book.setPic_path(largeImageUrl);
+        book.setRemarks("発売日：" + salesDate + "\r\n" + "出版社：" + publisherName + "");
 
         return book;
     }
@@ -74,4 +78,29 @@ public class BookManager {
 
         return json;
     }
+
+    //bookをDBへ登録
+
+    public void addBookToDb(Book book, String libraryId) throws SQLException {
+
+        BookDAO dao = new BookDAO(dbfilePath);
+        if (dao.checkExsistingBook(book)) {
+
+        } else {
+            dao.addBookToDb(book, libraryId);
+        }
+    }
+
+    //BookInfoをDBから取得
+    public Book getBookInfoFromDb(String bookId) {
+        Book book = null;
+
+        BookDAO dao = new BookDAO(dbfilePath);
+        book = dao.getBookInfo(bookId);
+
+        return book;
+
+    }
+
+
 }

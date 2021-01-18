@@ -102,7 +102,7 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <h3 class="my-3">貸出承認</h3>
+        <h3 class="my-3">返却反映</h3>
         <!--table-->
         <table class="table text-center table-hover">
             <thead class="black white-text">
