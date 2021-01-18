@@ -20,12 +20,13 @@ public class BookManager {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        rakutenAPIapplicationId = prop.getProperty("rakutenAPIapplicationId ");
+        rakutenAPIapplicationId = prop.getProperty("rakutenAPIapplicationId");
     }
 
     //BookInfo取得
     public Book getBookInfoFromRakutenAPI(String isbn) throws IOException {
-        Book book = null;
+        System.out.println("run:getBookInfoFromRakutenAPI");
+        Book book = new Book();
         String url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404" +
                 "?isbn=" + isbn + "&format=json&applicationId=" + rakutenAPIapplicationId;
 
@@ -44,6 +45,7 @@ public class BookManager {
         String largeImageUrl = bookJsonObject.getString("largeImageUrl");
 
         //オブジェクト化
+        book.setIsbn(isbn);//これは引数のISBN
         book.setTitle(title);
         book.setTitleKana(titleKana);
         book.setAuthor(author);

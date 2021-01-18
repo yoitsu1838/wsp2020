@@ -93,4 +93,15 @@
         <url-pattern>/AddBook</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchBook</servlet-name>
+        <display-name>SearchBook</display-name>
+        <description>SearchBook</description>
+        <servlet-class>servlet.SearchBook</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchBook</servlet-name>
+        <url-pattern>/SearchBook</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -1,5 +1,7 @@
 package servlet;
 
+import model.Book;
+import model.BookManager;
 import model.FriendManager;
 import model.UserManager;
 
@@ -25,18 +27,18 @@ public class SearchBook extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
 
-        if (!(request.getParameter("method") == null) && request.getParameter("method").equals("search")) {
+        if (!(request.getParameter("method") == null) && request.getParameter("method").equals("isbn") && !(request.getParameter("isbn") == null)) {
+
+            BookManager bm = new BookManager(dbInfoPath);
+            Book foundBook = bm.getBookInfoFromRakutenAPI(request.getParameter("isbn"));
+            request.setAttribute("foundBook",foundBook);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/views/searchBook.jsp").forward(request, response);
 
 
+        } else {
 
-
-        } else if(!(request.getParameter("method") == null) && request.getParameter("method").equals("load")) {
-
-
-
-        }else{
-
-            getServletContext().getRequestDispatcher("/WEB-INF/views/addBook.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/searchBook.jsp").forward(request, response);
         }
 
     }
@@ -45,7 +47,6 @@ public class SearchBook extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/addBook.jsp").forward(request, response);
-
+        this.doGet(request, response);
     }
 }

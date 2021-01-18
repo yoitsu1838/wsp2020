@@ -43,7 +43,7 @@
         <h3 class="my-3">本登録</h3>
         <div class="text-center">
             <br>
-            <a href="<%=request.getContextPath() %>/AddBook?method=search" >本を探す</a>
+            <a href="<%=request.getContextPath() %>/SearchBook?method=isbn" >本を探す</a>
             <br>
             <h4>本が見つからない場合</h4>
             <form action="AddBook" method="POST">

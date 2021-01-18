@@ -29,28 +29,9 @@ public class AddBook extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
 
-        if (!(request.getParameter("method") == null) && request.getParameter("method").equals("search")) {
-            FriendManager fm = new FriendManager();
-            if (!fm.exsistingCheck(request, dbInfoPath)) {
-                //重複がない時
-                fm.addFriend(request, dbInfoPath);
-                request.setAttribute("message", "友人追加しました。");
-            } else {
-                //重複がある時
-                request.setAttribute("errMsg", "この図書館は、すでに友人に追加済みです。");
 
-            }
+        getServletContext().getRequestDispatcher("/WEB-INF/views/addBook.jsp").forward(request, response);
 
-
-            getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
-
-        } else {
-
-            UserManager um = new UserManager();
-            um.getUserAddUrl(request);
-
-            getServletContext().getRequestDispatcher("/WEB-INF/views/addBook.jsp").forward(request, response);
-        }
 
     }
 
