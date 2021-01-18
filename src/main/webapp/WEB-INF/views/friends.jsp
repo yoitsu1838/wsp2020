@@ -25,16 +25,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() +"/assets/css/common.css"%>" rel="stylesheet">
 
-    <style>
-        h3 {
-            padding: 0.4em 0.5em; /*文字の上下 左右の余白*/
-            color: #494949; /*文字色*/
-            background: #f4f4f4; /*背景色*/
-            border-left: solid 5px #7db4e6; /*左線*/
-            border-bottom: solid 3px #d7d7d7; /*下線*/
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -85,7 +77,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Logout">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Logout">
                             ログアウト
                         </a>
                     </li>
@@ -101,13 +93,15 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <% String errMsg = (String)request.getAttribute("errMsg");%>
-        <% if (errMsg!=null){ %>
-        <div class="alert alert-danger" role="alert"><%= errMsg %></div>
+        <% String errMsg = (String) request.getAttribute("errMsg");%>
+        <% if (errMsg != null) { %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %>
+        </div>
         <% } %>
-        <% String message = (String)request.getAttribute("message");%>
-        <% if (message!=null){ %>
-        <div class="alert alert-success" role="alert"><%= message %></div>
+        <% String message = (String) request.getAttribute("message");%>
+        <% if (message != null) { %>
+        <div class="alert alert-success" role="alert"><%= message %>
+        </div>
         <% } %>
         <h3 class="my-3">友人管理</h3>
         <!--table-->
@@ -124,18 +118,21 @@
                 int count = 0;
             %>
             <% for (String libName : nameList) {
+                if (libName == null) {
+                    libName = "[ユーザーが存在しません]";
+                }
                 System.out.println(friendList.get(count));%>
             <tr>
                 <td style="width: 80%;"><%= libName %>
                 </td>
-                <form action="ViewFriends" name="form1" method="POST">
-                <td class="table-danger" style="width: 20%;">
+                <form action="ViewFriends" name="form<%=count%>" method="POST">
+                    <td class="table-danger" style="width: 20%;">
 
                         <input type="hidden" name="friendLibId"
                                value="<%= friendList.get(count)%>"/>
-                        <a href="javascript:form1.submit()">削除する</a>
+                        <a href="javascript:form<%=count%>.submit()">削除する</a>
 
-                </td>
+                    </td>
                 </form>
             </tr>
             <%

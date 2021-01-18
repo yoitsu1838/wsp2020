@@ -1,8 +1,6 @@
 package servlet;
 
-import model.FriendManager;
-import model.User;
-import model.UserManager;
+import model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddFriend extends HttpServlet {
 
@@ -26,7 +26,7 @@ public class AddFriend extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
 
-        if (!(request.getParameter("method") == null )&& request.getParameter("method").equals("fad")) {
+        if (!(request.getParameter("method") == null) && request.getParameter("method").equals("fad")) {
             System.out.println("fad");
             FriendManager fm = new FriendManager();
             if (!fm.exsistingCheck(request, dbInfoPath)) {
@@ -38,6 +38,24 @@ public class AddFriend extends HttpServlet {
                 request.setAttribute("errMsg", "この図書館は、すでに友人に追加済みです。");
 
             }
+            /* toppage 友人データ取得*/
+            UserManager um = new UserManager();
+            FriendList friendList = fm.loadFriends(request, dbInfoPath);
+            List<Friend> list;
+            List<String> friendLibNames = new ArrayList<String>();
+            List<String> friendLibIds = new ArrayList<String>();
+            list = friendList.getList();
+            for (Friend friend : list) {
+                String libId = friend.getFriendLibraryId();
+                String libName = um.getLibraryName(libId, dbInfoPath);
+                friendLibNames.add(libName);
+                friendLibIds.add(libId);
+            }
+
+            request.setAttribute("friendNameList", friendLibNames);
+            request.setAttribute("friendlist", friendLibIds);
+            /* // */
+
             getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 
         } else {

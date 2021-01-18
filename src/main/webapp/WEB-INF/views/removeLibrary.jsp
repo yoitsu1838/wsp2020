@@ -24,15 +24,8 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
-    <style>
-        h3 {
-            padding: 0.4em 0.5em; /*文字の上下 左右の余白*/
-            color: #494949; /*文字色*/
-            background: #f4f4f4; /*背景色*/
-            border-left: solid 5px #7db4e6; /*左線*/
-            border-bottom: solid 3px #d7d7d7; /*下線*/
-        }
-    </style>
+    <link href="<%=request.getContextPath() +"/assets/css/common.css"%>" rel="stylesheet">
+
 </head>
 <body>
 <header>
@@ -83,7 +76,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item hoverlink">
-                        <a class="nav-link waves-effect waves-light" href="/Logout">
+                        <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Logout">
                             ログアウト
                         </a>
                     </li>
@@ -98,7 +91,7 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
-        <h3 class="my-3">図書館削除</h3>
+        <h3 class="my-3 topic">図書館削除</h3>
         <div class="text-center">
             <h4>図書館を削除しますか？</h4>
             <br>
@@ -109,7 +102,6 @@
                 <button type="submit" class="btn btn-outline-info">削除する</button>
                 <a class="btn btn-outline-info" href="<%=request.getContextPath() %>/">キャンセル</a>
             </form>
-
 
 
         </div>

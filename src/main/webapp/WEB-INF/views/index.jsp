@@ -24,7 +24,50 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() +"/assets/css/common.css"%>" rel="stylesheet">
     <!--  //all  -->
+
+    <style>
+        #plus {
+            width: 80px;
+            height: 80px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            background: #3f98ef;
+            opacity: 0.6;
+            border-radius: 50%;
+        }
+
+        #plus a {
+            position: relative;
+            display: block;
+            width: 80px;
+            height: 80px;
+            text-decoration: none;
+        }
+
+        #plus::before, #plus::after {
+            display: block;
+            content: '';
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            position: absolute;
+            width: 30px;
+            height: 5px;
+            top: 38px;
+            left: 25px;
+        }
+
+        #plus:before {
+            width: 5px;
+            height: 30px;
+            top: 25px;
+            left: 38px;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -134,6 +177,9 @@
                             <%
                                 int count = 0;
                                 for (String libName : nameList) {
+                                    if (libName == null) {
+                                        continue;
+                                    }
                             %>
                             <form action="ViewFriends" name="form1" method="POST">
                                 <li class="list-group-item">
@@ -225,7 +271,10 @@
     <!-- //Main container-->
 </main>
 <!--Main layout-->
-
+<!--books closed-->
+<div id="plus">
+    <a href="addBook.html"></a>
+</div>
 <!-- all -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
