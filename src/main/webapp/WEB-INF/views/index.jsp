@@ -227,19 +227,21 @@
                             <%
                                 if (book.getPic_path() == null) {
                             %>
-                            <img class="card-img-top" height="200px"
+                            <img class="card-img-top" height="240px"
                                  src="<%=request.getContextPath() +"/assets/images/no_image_tate.jpg"%>">
                             <%
                             } else {
                             %>
-                            <img class="card-img-top" height="200px" src="<%=book.getPic_path()%>">
+                            <img class="card-img-top" height="240px" src="<%=book.getPic_path()%>">
                             <%
                                 }
                             %>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><%=book.getTitle()%>
-                                </li>
-                            </ul>
+                            <div class="bookText">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><%=book.getTitle()%>
+                                    </li>
+                                </ul>
+                            </div>
                             <%
                                 if (collection.getIsLending()) {
                             %>
@@ -249,6 +251,7 @@
                             <%
                                 }
                             %>
+
                         </div>
                     </div>
                     <%

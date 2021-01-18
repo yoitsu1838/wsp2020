@@ -2,6 +2,7 @@ package servlet;
 
 import model.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,10 @@ public class AddFriend extends HttpServlet {
             request.setAttribute("friendlist", friendLibIds);
             /* // */
 
-            getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+            //AddBookへもどる　
+            String disp = request.getContextPath() + "/";
+            RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+            dispatch.forward(request, response);
 
         } else {
 
