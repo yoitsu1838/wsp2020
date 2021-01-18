@@ -15,5 +15,9 @@ public class FriendList {
         return list;
     }
 
+    public int size(){
+        return list.size();
+    }
+
 
 }

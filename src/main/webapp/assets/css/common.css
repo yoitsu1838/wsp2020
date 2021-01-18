@@ -14,3 +14,9 @@ h3 {
     border-left: solid 5px #7db4e6; /*左線*/
     border-bottom: solid 3px #d7d7d7; /*下線*/
 }
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 600px;
+}

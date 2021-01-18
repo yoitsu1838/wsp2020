@@ -29,6 +29,7 @@
 
     <style>
         #plus {
+            margin: 15px;
             width: 80px;
             height: 80px;
             position: fixed;
@@ -68,6 +69,7 @@
             text-align: center;
         }
     </style>
+
 </head>
 <body>
 
@@ -271,10 +273,30 @@
     <!-- //Main container-->
 </main>
 <!--Main layout-->
+
 <!--books closed-->
 <div id="plus">
-    <a href="addBook.html"></a>
+    <a href="addBook.html" data-toggle="modal" data-target="#addBookModal"></a>
 </div>
+
+<!-- bookAdd modal -->
+<!-- Modal -->
+
+<div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <iframe id="iframeBookAdd" src="<%=request.getContextPath() %>/AddBook"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- all -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

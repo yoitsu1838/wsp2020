@@ -3,6 +3,9 @@ package model;
 public class Book {
     private String isbn;
     private String title;
+    private String titleKana;
+    private String publisherName;
+    private String salesDate;
     private String author;
     private String volume;
     private String pic_path;
@@ -22,6 +25,30 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTitleKana() {
+        return titleKana;
+    }
+
+    public void setTitleKana(String titleKana) {
+        this.titleKana = titleKana;
+    }
+
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
+    public String getSalesDate() {
+        return salesDate;
+    }
+
+    public void setSalesDate(String salesDate) {
+        this.salesDate = salesDate;
     }
 
     public String getAuthor() {

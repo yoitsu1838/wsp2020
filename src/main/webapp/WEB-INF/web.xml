@@ -82,4 +82,15 @@
         <url-pattern>/RemoveBook</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddBook</servlet-name>
+        <display-name>AddBook</display-name>
+        <description>AddBook</description>
+        <servlet-class>servlet.AddBook</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddBook</servlet-name>
+        <url-pattern>/AddBook</url-pattern>
+    </servlet-mapping>
+
 </web-app>

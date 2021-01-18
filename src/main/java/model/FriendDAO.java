@@ -12,6 +12,8 @@ public class FriendDAO {
     final private static String driverClassName = "org.postgresql.Driver";
     final private static Properties prop = new Properties();
 
+    //TODO BookManagerに沿ってpropの書き方を修正
+
     public boolean addFriend(Friend friend, String file) throws SQLException {
         boolean result = false;
         try {
