@@ -128,4 +128,31 @@ public class CollectionDAO {
     //所有書物を削除
 
 
+    //貸出申請を実行
+    public void applyBook(String libraryId, String bookId, String fromUser, String date) {
+        Connection connection;
+        String sql = "UPDATE collection SET lending_reception_date=?, from_user=?,is_lending=true WHERE library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+
+            pstmt.setString(1, date);
+            pstmt.setString(2, fromUser);
+            pstmt.setString(3, libraryId);
+            pstmt.setString(4, bookId);
+
+            int num = pstmt.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
+        }
+    }
+
+
 }

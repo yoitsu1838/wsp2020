@@ -104,4 +104,15 @@
         <url-pattern>/SearchBook</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ApplicationConfirm</servlet-name>
+        <display-name>ApplicationConfirm</display-name>
+        <description>ApplicationConfirm</description>
+        <servlet-class>servlet.ApplicationConfirm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplicationConfirm</servlet-name>
+        <url-pattern>/ApplicationConfirm</url-pattern>
+    </servlet-mapping>
+
 </web-app>

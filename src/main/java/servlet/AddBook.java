@@ -47,7 +47,7 @@ public class AddBook extends HttpServlet {
 
         if (session.getAttribute("foundBook") != null) { //from楽天API
             book = ((Book) session.getAttribute("foundBook"));
-            libraryIdForBooktable = null;
+            libraryIdForBooktable = null;//apiから取得したものにlibraryIdはつけない
         } else {//fromPOST
             book = new Book();
 

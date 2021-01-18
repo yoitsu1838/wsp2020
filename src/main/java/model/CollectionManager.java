@@ -63,4 +63,11 @@ public class CollectionManager {
 
     //所有書物を削除
 
+
+    //貸出申請を実行
+    public void applyBook(String libraryId, String bookId, String fromUser, String date) {
+        CollectionDAO dao = new CollectionDAO(dbfilePath);
+        dao.applyBook(libraryId, bookId, fromUser, date);
+    }
+
 }

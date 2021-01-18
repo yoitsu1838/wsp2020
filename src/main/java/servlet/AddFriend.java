@@ -58,7 +58,7 @@ public class AddFriend extends HttpServlet {
             /* // */
 
             //AddBookへもどる　
-            String disp = request.getContextPath() + "/";
+            String disp = "/";
             RequestDispatcher dispatch = request.getRequestDispatcher(disp);
             dispatch.forward(request, response);
 

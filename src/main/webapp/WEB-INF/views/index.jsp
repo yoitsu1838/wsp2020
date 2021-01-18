@@ -183,11 +183,12 @@
                                         continue;
                                     }
                             %>
-                            <form action="ViewFriends" name="form1" method="POST">
+                            <form action="./" name="form<%=count%>" method="POST">
                                 <li class="list-group-item">
                                     <input type="hidden" name="friendLibId"
                                            value="<%= friendList.get(count)%>"/>
-                                    <a class="text-dark card-link" href="#">
+                                    <a type="submit" class="text-dark card-link"
+                                       href="javascript:form<%=count%>.submit()">
                                         <%= libName %>
                                     </a>
                                 </li>
@@ -247,7 +248,8 @@
                             %>
                             <a href="#" class="btn btn-outline-warning" role="button">貸出中</a>
                             <% } else { %>
-                            <a href="applicationConfirm.html" class="btn btn-outline-success" role="button">未貸出</a>
+                            <a href="ApplicationConfirm?bookId=<%=book.getIsbn()%>" class="btn btn-outline-success"
+                               role="button">未貸出</a>
                             <%
                                 }
                             %>
