@@ -47,7 +47,8 @@ public class ApplicationConfirm extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
         String appluingName = ((User) session.getAttribute("member")).getLibraryName();
-        String appluingLibraryId = ((User) session.getAttribute("member")).getLibraryId();
+        //String appluingLibraryId = ((User) session.getAttribute("member")).getLibraryId();
+        String appluingLibraryId = (String) session.getAttribute("nowFriendId");
         LocalDateTime nowDateTime = LocalDateTime.now();
         DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 

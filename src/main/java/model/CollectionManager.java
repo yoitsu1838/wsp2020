@@ -77,11 +77,18 @@ public class CollectionManager {
         CollectionDAO dao = new CollectionDAO(dbfilePath);
         dao.approveBook(libraryId, bookId, date);
     }
+
     //貸出申請を拒否
-    public void rejectBook(String libraryId,String bookId){
+    public void rejectBook(String libraryId, String bookId) {
         CollectionDAO dao = new CollectionDAO(dbfilePath);
         dao.rejectBook(libraryId, bookId);
 
+    }
+
+    //返却反映を行う
+    public void returnBookReflect(String libraryId, String bookId) {
+        CollectionDAO dao = new CollectionDAO(dbfilePath);
+        dao.returnBookReflect(libraryId, bookId);
     }
 
 

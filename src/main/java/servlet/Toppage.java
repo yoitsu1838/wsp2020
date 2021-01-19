@@ -45,6 +45,7 @@ public class Toppage extends HttpServlet {
         //一覧表示の本を取得
         CollectionManager cm = new CollectionManager(dbInfoPath);
         User user = (User) session.getAttribute("member");
+        session.setAttribute("nowFriendId",user.getLibraryId());//デバック用　自分の本で貸出処理をできなくしたら消す
         CollectionList cList = cm.getCollections(user.getLibraryId());
         //collectionListからBookInfoを取得
         BookManager bm = new BookManager(dbInfoPath);
@@ -91,6 +92,8 @@ public class Toppage extends HttpServlet {
         //一覧表示の本を取得
         CollectionManager cm = new CollectionManager(dbInfoPath);
         User user = (User) session.getAttribute("member");
+        //今ポストされたフレンドのUserIDをセッションへ
+        session.setAttribute("nowFriendId",request.getParameter("friendLibId"));
         //TODO 相互に友だち追加をしているかの確認
         CollectionList cList = cm.getCollections(request.getParameter("friendLibId"));
         //collectionListからBookInfoを取得

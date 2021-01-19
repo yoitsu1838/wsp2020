@@ -1,4 +1,7 @@
-<%--
+<%@ page import="model.CollectionList" %>
+<%@ page import="model.BookList" %>
+<%@ page import="model.Collection" %>
+<%@ page import="model.Book" %><%--
   Created by IntelliJ IDEA.
   User: yoitsu
   Date: 2021/01/17
@@ -102,6 +105,16 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
+        <% String errMsg = (String) request.getAttribute("errMsg");%>
+        <% if (errMsg != null) { %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %>
+        </div>
+        <% } %>
+        <% String message = (String) request.getAttribute("message");%>
+        <% if (message != null) { %>
+        <div class="alert alert-success" role="alert"><%= message %>
+        </div>
+        <% } %>
         <h3 class="my-3">返却反映</h3>
         <!--table-->
         <table class="table text-center table-hover">
@@ -114,22 +127,48 @@
             </tr>
             </thead>
             <tbody>
+            <%
+                CollectionList cList = (CollectionList) request.getAttribute("collectionlist");
+                BookList bList = (BookList) request.getAttribute("booklist");
+
+                for (int i = 0; i < cList.size(); i++) {
+                    Collection collection = cList.getList().get(i);
+                    Book book = bList.getList().get(i);
+
+                    //TODO if文をきれいにする
+                    if (collection.getLendingReceptionDate() == null || collection.getLendingReceptionDate().equals("")) {
+                        continue;
+                    }
+
+                    if (collection.getLendingApprovalDate() == null || collection.getLendingApprovalDate().equals("")) {
+                        //処理を継続
+                        continue;
+
+                    } else {
+                        if (collection.getLendingApprovalDate().length() > 0) {
+                            //承認されたと判断できる
+
+
+                        }
+                    }
+
+            %>
             <tr>
-                <th scope="row">yy-mm-dd</th>
-                <td>あいうえお</td>
-                <td>山田A子</td>
+                <th scope="row"><%=collection.getLendingApprovalDate()%></th>
+                <td><%=book.getTitle()%>></td>
+                <td><%=collection.getFromUser()%></td>
+                <form action="Return" name="returnForm<%=i%>" method="post">
                 <td class="table-info">
-                    <a href="#">返却反映</a>
+
+                        <input type="hidden" name="bookId" value="<%=book.getIsbn()%>"/>
+                        <a href="javascript:returnForm<%=i%>.submit()">返却反映</a>
+
                 </td>
+                </form>
             </tr>
-            <tr>
-                <th scope="row">yy-mm-dd</th>
-                <td>かきくけこ</td>
-                <td>佐藤B子</td>
-                <td class="table-info">
-                    <a href="#">返却反映</a>
-                </td>
-            </tr>
+            <%
+                }
+            %>
             </tbody>
         </table>
         <!--table closed-->

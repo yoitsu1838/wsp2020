@@ -204,5 +204,28 @@ public class CollectionDAO {
         }
     }
 
+    //返却反映を行う
+    public void returnBookReflect(String libraryId, String bookId) {
+        Connection connection;
+        String sql = "UPDATE collection SET is_lending=false, lending_reception_date=null, lending_approval_date=null, from_user=null WHERE library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+
+            pstmt.setString(1, libraryId);
+            pstmt.setString(2, bookId);
+
+            int num = pstmt.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
+        }
+    }
 
 }

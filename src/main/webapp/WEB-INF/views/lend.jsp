@@ -156,20 +156,24 @@
                 </td>
                 <td><%=collection.getFromUser()%>
                 </td>
+                <form action="LendApprove" name="permitForm<%=i%>" method="post">
                 <td class="table-info">
-                    <form action="LendApprove" name="permitForm<%=i%>" method="post">
+
                         <input type="hidden" name="bookId" value="<%=book.getIsbn()%>"/>
                         <input type="hidden" name="method" value="approve"/>
                         <a href="javascript:permitForm<%=i%>.submit()">承認</a>
-                    </form>
+
                 </td>
+                </form>
+                <form action="LendApprove" name="rejectForm<%=i%>" method="post">
                 <td class="table-warning">
-                    <form action="LendApprove" name="rejectForm<%=i%>" method="post">
+
                         <input type="hidden" name="bookId" value="<%=book.getIsbn()%>"/>
                         <input type="hidden" name="method" value="reject"/>
                         <a href="javascript:rejectForm<%=i%>.submit()">拒否</a>
-                    </form>
+
                 </td>
+                </form>
             </tr>
             <%
                 }
