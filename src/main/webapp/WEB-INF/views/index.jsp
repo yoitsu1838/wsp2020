@@ -161,7 +161,7 @@
                 <div class="sidebar_content border-right border-left border-bottom">
                     <!--User-->
                     <div class="card shadow-none mb-3">
-                        <div class="card-body border border-info"><a href="#myBooks"><h4 class="my-auto">
+                        <div class="card-body border border-info"><a href="<%=request.getContextPath() %>/"><h4 class="my-auto">
                             <% if (!(session.getAttribute("member") == null)) {
                                 out.print(((User) session.getAttribute("member")).getLibraryName());
                             } %>

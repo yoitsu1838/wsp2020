@@ -54,6 +54,7 @@ public class AddBook extends HttpServlet {
             String bookId = UUID.randomUUID().toString();
             String title = request.getParameter("title");
             String author = request.getParameter("author");
+            String volume = request.getParameter("volume");
             String remark = request.getParameter("remark");
 
             book.setIsbn(bookId);
