@@ -111,6 +111,7 @@ public class CollectionDAO {
                 collection.setIsLending(resultSet.getBoolean("is_lending"));
                 collection.setLendingReceptionDate(resultSet.getString("lending_reception_date"));
                 collection.setLendingApprovalDate(resultSet.getString("lending_approval_date"));
+                collection.setFromUser(resultSet.getString("from_user"));
 
                 collectionList.addCollectionForList(collection);
             }
@@ -143,6 +144,55 @@ public class CollectionDAO {
             pstmt.setString(2, fromUser);
             pstmt.setString(3, libraryId);
             pstmt.setString(4, bookId);
+
+            int num = pstmt.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
+        }
+    }
+
+    //貸出申請を承認
+    public void approveBook(String libraryId, String bookId, String date) {
+        Connection connection;
+        String sql = "UPDATE collection SET lending_approval_date=? WHERE library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+
+            pstmt.setString(1, date);
+            pstmt.setString(2, libraryId);
+            pstmt.setString(3, bookId);
+
+            int num = pstmt.executeUpdate();
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
+        }
+    }
+
+    //貸出申請を拒否
+    public void rejectBook(String libraryId, String bookId) {
+        Connection connection;
+        String sql = "UPDATE collection SET is_lending=false, lending_reception_date=null, from_user=null WHERE library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+
+            pstmt.setString(1, libraryId);
+            pstmt.setString(2, bookId);
 
             int num = pstmt.executeUpdate();
 

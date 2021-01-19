@@ -3,6 +3,8 @@ package model;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 public class CollectionManager {
@@ -69,5 +71,18 @@ public class CollectionManager {
         CollectionDAO dao = new CollectionDAO(dbfilePath);
         dao.applyBook(libraryId, bookId, fromUser, date);
     }
+
+    //貸出申請を承認
+    public void approveBook(String libraryId, String bookId, String date) {
+        CollectionDAO dao = new CollectionDAO(dbfilePath);
+        dao.approveBook(libraryId, bookId, date);
+    }
+    //貸出申請を拒否
+    public void rejectBook(String libraryId,String bookId){
+        CollectionDAO dao = new CollectionDAO(dbfilePath);
+        dao.rejectBook(libraryId, bookId);
+
+    }
+
 
 }

@@ -6,6 +6,7 @@ public class Collection {
     private Boolean isLending;
     private String lendingReceptionDate;
     private String lendingApprovalDate;
+    private String fromUser;
 
     public String getLibraryId() {
         return libraryId;
@@ -45,5 +46,13 @@ public class Collection {
 
     public void setLendingApprovalDate(String lendingApprovalDate) {
         this.lendingApprovalDate = lendingApprovalDate;
+    }
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
     }
 }
