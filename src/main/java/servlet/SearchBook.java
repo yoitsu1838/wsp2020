@@ -33,6 +33,7 @@ public class SearchBook extends HttpServlet {
 
             BookManager bm = new BookManager(dbInfoPath);
             Book foundBook = bm.getBookInfoFromRakutenAPI(request.getParameter("isbn"));
+            session.setAttribute("bookAddStatus",false);
             request.setAttribute("foundBook", foundBook);
             session.setAttribute("foundBook", foundBook);
 
@@ -54,6 +55,7 @@ public class SearchBook extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
         if (!(request.getParameter("method") == null) && request.getParameter("method").equals("nowBookAdd")) {
+            session.setAttribute("bookAddStatus",true);
             //AddBookへもどる　
             String disp = "AddBook";
             RequestDispatcher dispatch = request.getRequestDispatcher(disp);

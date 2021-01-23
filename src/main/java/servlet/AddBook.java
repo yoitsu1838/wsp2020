@@ -38,16 +38,18 @@ public class AddBook extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String dbInfoPath = getServletContext().getRealPath("WEB-INF/config.properties");
-        Book book;
+        Book book = null;
 
 
         HttpSession session = request.getSession();
+        session.setAttribute("bookAddStatus",false);
         String libraryId = ((User) session.getAttribute("member")).getLibraryId();
         String libraryIdForBooktable = libraryId;
 
-        if (session.getAttribute("foundBook") != null) { //from楽天API
+        if ((boolean) session.getAttribute("bookAddStatus")) { //from楽天API
             book = ((Book) session.getAttribute("foundBook"));
             libraryIdForBooktable = null;//apiから取得したものにlibraryIdはつけない
+
         } else {//fromPOST
             book = new Book();
 
@@ -60,9 +62,11 @@ public class AddBook extends HttpServlet {
             book.setIsbn(bookId);
             book.setTitle(title);
             book.setAuthor(author);
-            book.setRemarks(remark);
+            book.setVolume(volume);
+            book.setRemarks(CollectionManager.htmlEscape(remark));
 
         }
+
 
         BookManager bm = new BookManager(dbInfoPath);
         CollectionManager cm = new CollectionManager(dbInfoPath);

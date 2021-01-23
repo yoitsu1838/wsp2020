@@ -42,11 +42,11 @@
             <h4>ISBNを入力してください</h4>
             <form action="SearchBook" method="get">
                 <div class="form-group row">
-                    <label for="inputISBN" class="col-sm-2 col-form-label">ISBN</label>
+                    <label for="inputISBN" class="col-sm-2 col-form-label">ISBN-10</label>
                     <div class="col-sm-10">
                         <input type="hidden" name="method" value="isbn"/>
-                        <input type="text" class="form-control" name="isbn" id="inputISBN" value="4815601712"
-                               placeholder="ISBN" required/>
+                        <input type="text" class="form-control" name="isbn" id="inputISBN" value="4815601712" maxlength="10" minlength="10"
+                               placeholder="10ケタのISBNを入力してください" required/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-info">探す</button>

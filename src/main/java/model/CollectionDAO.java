@@ -127,6 +127,32 @@ public class CollectionDAO {
 
 
     //所有書物を削除
+    public boolean deleteCollection(String libraryId, String bookId){
+        boolean result = false;
+        Connection connection;
+        String delSql = "DELETE FROM collection WHERE library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(delSql);
+
+            pstmt.setString(1, libraryId);
+            pstmt.setString(2, bookId);
+
+            int num = pstmt.executeUpdate();
+
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+
+        }
+
+        return result;
+    }
+
 
 
     //貸出申請を実行

@@ -154,7 +154,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">巻数</th>
-                                    <td>[巻数情報なし]</td>
+                                    <td><%=book.getVolume()%></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">備考</th>

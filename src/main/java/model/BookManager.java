@@ -55,7 +55,7 @@ public class BookManager {
         book.setPublisherName(publisherName);
         book.setSalesDate(salesDate);
         book.setPic_path(largeImageUrl);
-        book.setRemarks("発売日：" + salesDate + "\r\n" + "出版社：" + publisherName + "");
+        book.setRemarks("発売日：" + salesDate + "\r\n" + "出版社：" + publisherName + "");//preで出力
 
         return book;
     }
@@ -87,6 +87,7 @@ public class BookManager {
         if (dao.checkExsistingBook(book)) {
 
         } else {
+            System.out.println("DB追加実行");
             dao.addBookToDb(book, libraryId);
         }
     }

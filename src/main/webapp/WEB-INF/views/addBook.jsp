@@ -95,7 +95,7 @@
                     <div class="form-group row">
                         <label for="inputNumber" class="col-sm-2 col-form-label">巻数</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputNumber" placeholder="巻数"/>
+                            <input type="text" name="volume" class="form-control" id="inputNumber" placeholder="巻数"/>
                         </div>
                     </div>
                     <div class="form-group row">
