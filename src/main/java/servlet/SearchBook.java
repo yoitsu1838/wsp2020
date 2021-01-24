@@ -33,7 +33,6 @@ public class SearchBook extends HttpServlet {
 
             BookManager bm = new BookManager(dbInfoPath);
             Book foundBook = bm.getBookInfoFromRakutenAPI(request.getParameter("isbn"));
-            session.setAttribute("bookAddStatus",false);
             request.setAttribute("foundBook", foundBook);
             session.setAttribute("foundBook", foundBook);
 

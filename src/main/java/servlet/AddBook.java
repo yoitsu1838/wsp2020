@@ -29,7 +29,7 @@ public class AddBook extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
 
-
+        session.setAttribute("bookAddStatus",false);
         getServletContext().getRequestDispatcher("/WEB-INF/views/addBook.jsp").forward(request, response);
 
 
@@ -42,7 +42,7 @@ public class AddBook extends HttpServlet {
 
 
         HttpSession session = request.getSession();
-        session.setAttribute("bookAddStatus",false);
+
         String libraryId = ((User) session.getAttribute("member")).getLibraryId();
         String libraryIdForBooktable = libraryId;
 
@@ -58,6 +58,11 @@ public class AddBook extends HttpServlet {
             String author = request.getParameter("author");
             String volume = request.getParameter("volume");
             String remark = request.getParameter("remark");
+            System.out.println(remark);
+
+            /* Validation */
+
+            /**/
 
             book.setIsbn(bookId);
             book.setTitle(title);

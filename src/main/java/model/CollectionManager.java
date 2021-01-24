@@ -48,7 +48,7 @@ public class CollectionManager {
     }
 
 
-    /* escape処理　参考：https://www.atmarkit.co.jp/ait/articles/0202/16/news002.html */
+    /* escape処理　参考：http://write-remember.com/program/java/html_escape/ */
     /**
      * <p>[概 要] HTMLエスケープ処理</p>
      * <p>[詳 細] </p>
