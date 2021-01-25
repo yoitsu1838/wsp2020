@@ -56,7 +56,8 @@ public class ApplicationConfirm extends HttpServlet {
         cm.applyBook(appluingLibraryId, bookId, appluingName, nowDateTime.format(java8Format));
         request.setAttribute("message", "貸出申請を実行しました。");
 
-        //TODO　画面遷移
-        this.doGet(request, response);
+        //申請内容の本を非表示に
+        request.removeAttribute("applyBook");
+        getServletContext().getRequestDispatcher("/WEB-INF/views/applicationConfirm.jsp").forward(request, response);
     }
 }

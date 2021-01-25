@@ -180,6 +180,10 @@
 
         </div>
         <%
+        } else {
+        %>
+        <a class="btn btn-outline-info" href="./">トップへ戻る</a>
+        <%
             }
         %>
     </div>
