@@ -161,7 +161,8 @@
                 <div class="sidebar_content border-right border-left border-bottom">
                     <!--User-->
                     <div class="card shadow-none mb-3">
-                        <div class="card-body border border-info"><a href="<%=request.getContextPath() %>/"><h4 class="my-auto">
+                        <div class="card-body border border-info"><a href="<%=request.getContextPath() %>/"><h4
+                                class="my-auto">
                             <% if (!(session.getAttribute("member") == null)) {
                                 out.print(((User) session.getAttribute("member")).getLibraryName());
                             } %>
@@ -221,9 +222,24 @@
                     <div class="col-sm-4 col-lg-3 pb-3">
                         <div class="card">
                             <div class="card-img-overlay py-0 px-1">
-                                <button type="button" class="close" aria-label="Close">
+                                <%
+                                    if (collection.getIsLending()) {
+                                %>
+                                <button type="button" class="close" data-toggle="modal" data-target="#nowLending">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                                <%
+                                } else {
+                                %>
+                                <button type="button" class="close" aria-label="Close"
+                                        onclick="location.href='RemoveBook?bookId=<%=book.getIsbn()%>'">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                                <%
+                                    }
+                                %>
+
                             </div>
                             <%
                                 if (book.getPic_path() == null) {
@@ -294,6 +310,40 @@
         </div>
     </div>
 </div>
+
+<!-- bookDeleteModal -->
+<!-- Central Modal Medium Warning -->
+<div class="modal fade" id="nowLending" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">貸出中</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>現在この書籍は貸出中のため、<br>削除処理を行うことはできません。</p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Warning-->
 
 <!-- all -->
 <!-- JQuery -->

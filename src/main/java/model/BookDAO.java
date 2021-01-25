@@ -144,7 +144,48 @@ public class BookDAO {
         return book;
     }
 
-    //
+    //book削除
+    public boolean removeBook(String bookId, String libraryId,HttpServletResponse respons) {
+        boolean result = false;
+        Connection connection;
+        String delSql = "DELETE from collection where library_id=? AND book_id=?";
+
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, usr, password);
+            PreparedStatement pstmt = connection.prepareStatement(delSql);
+
+            System.out.println(libraryId+"///"+bookId);
+            pstmt.setString(1, libraryId);
+            pstmt.setString(2, bookId);
+
+            pstmt.execute();
+
+
+            connection.close();
+        } catch (Exception e) {
+            printError(respons,e);
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+
+    /*debug*/
+    public void printError(HttpServletResponse response, Exception e) {
+        try {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<html><head><title>DB ERROR</title></head><body>");
+            out.println(e.getMessage() + "<br>");
+            out.println("</body></html>");
+            out.close();
+        } catch (Exception er) {
+            er.printStackTrace();
+        }
+    }
+
 
 
 }

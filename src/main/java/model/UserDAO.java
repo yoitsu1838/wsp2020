@@ -262,7 +262,6 @@ public class UserDAO {
             }
 
             if (result) {
-                System.out.println("mark:" + delSql);
                 ResultSet resultSet2 = pstmt2.executeQuery();
                 System.out.println(resultSet2);
             }

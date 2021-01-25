@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Book" %><%--
   Created by IntelliJ IDEA.
   User: yoitsu
   Date: 2021/01/17
@@ -102,32 +102,89 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
+            <% String errMsg = (String) request.getAttribute("errMsg");%>
+            <% if (errMsg != null) { %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %>
+        </div>
+            <% } %>
+            <% String message = (String) request.getAttribute("message");%>
+            <% if (message != null) { %>
+        <div class="alert alert-success" role="alert"><%= message %>
+        </div>
+            <% } %>
         <h3 class="my-3">本削除</h3>
+            <%
+            if (request.getAttribute("removeBook") != null) {
+                Book book = (Book) request.getAttribute("removeBook");
+                String picpath = book.getPic_path();
+                String cutStr = "?_ex=200x200";
+            %>
         <div class="text-center">
             <h4>この本を削除しますか？</h4>
             <br>
-            <table class="table text-center table-hover m-auto" style="width: 50%;">
-                <tbody>
-                <tr>
-                    <th scope="row">タイトル</th>
-                    <td>title</td>
-                </tr>
-                <tr>
-                    <th scope="row">作者</th>
-                    <td>auther</td>
-                </tr>
-                <tr>
-                    <th scope="row">巻数</th>
-                    <td>number</td>
-                </tr>
-                <tr>
-                    <th scope="row">備考</th>
-                    <td>text</td>
-                </tr>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-outline-info">削除する</button>
-            <button type="button" class="btn btn-outline-info">キャンセル</button>
+            <div class="card mx-auto my-3" style="width: 70%;">
+                <div class="row no-gutters">
+
+                    <div class="col-md-4">
+                        <%
+                            if (picpath != null && picpath.length() > 60) {
+                        %>
+                        <img class="card-img" width="200px"
+                             src="<%=picpath.substring(0,picpath.length()-cutStr.length())%>"/>
+                        <%
+                        } else {
+                        %>
+                        <img class="card-img" width="200px"
+                             src="<%=request.getContextPath() %>/assets/images/no_image_tate.jpg"/>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+
+                            <h5 class="card-title"><%=book.getTitle()%>
+                            </h5>
+                            <table class="table text-center table-hover m-auto" style="width: 90%;">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">作者</th>
+                                    <td><%=book.getAuthor()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">巻数</th>
+                                    <td><%=book.getVolume()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">備考</th>
+                                    <td>
+                                        <pre><%=book.getRemarks()%></pre>
+                                        <br></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <form action="RemoveBook" method="POST">
+                <input type="hidden" name="bookId" value="<%=book.getIsbn()%>">
+                <button type="submit" class="btn btn-outline-info">削除する</button>
+                <a class="btn btn-outline-info" href="./">キャンセル</a>
+            </form>
+
+            <%
+            } else {
+            %>
+            <a class="btn btn-outline-info" href="./">トップへ戻る</a>
+            <%
+                }
+            %>
 
         </div>
 </main>

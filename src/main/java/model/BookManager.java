@@ -2,6 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -101,6 +102,12 @@ public class BookManager {
 
         return book;
 
+    }
+
+    //Book削除
+    public void removeBook(String bookId, String libraryId, HttpServletResponse respons) {
+        BookDAO dao = new BookDAO(dbfilePath);
+        dao.removeBook(bookId, libraryId, respons);
     }
 
 
