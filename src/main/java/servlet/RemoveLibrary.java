@@ -30,10 +30,13 @@ public class RemoveLibrary extends HttpServlet {
 
         if (request.getParameter("method").equals("executeDel")) {
             result = um.cancellation(request, dbInfoPath);
+            System.out.println("delete-result:"+result);
             if (result) {
 
                 session.invalidate();
                 getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            }else{
+                request.setAttribute("errMsg","図書館の削除に失敗しました。<br> 貸出中の本または借りている本はありませんか？");
             }
         }
         getServletContext().getRequestDispatcher("/WEB-INF/views/removeLibrary.jsp").forward(request, response);

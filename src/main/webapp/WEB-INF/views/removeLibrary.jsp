@@ -61,12 +61,12 @@
                             返却反映
                         </a>
                     </li>
-                    <li class="nav-item active hoverlink">
+                    <li class="nav-item hoverlink">
                         <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/ViewFriends">
                             友人管理
                         </a>
                     </li>
-                    <li class="nav-item hoverlink">
+                    <li class="nav-item active hoverlink">
                         <a class="nav-link waves-effect waves-light"
                            href="<%=request.getContextPath() %>/RemoveLibrary">
                             図書館削除
@@ -91,11 +91,21 @@
 <main class="mt-5">
     <!--Main container-->
     <div class="container">
+        <% String errMsg = (String) request.getAttribute("errMsg");%>
+        <% if (errMsg != null) { %>
+        <div class="alert alert-danger" role="alert"><%= errMsg %>
+        </div>
+        <% } %>
+        <% String message = (String) request.getAttribute("message");%>
+        <% if (message != null) { %>
+        <div class="alert alert-success" role="alert"><%= message %>
+        </div>
+        <% } %>
         <h3 class="my-3 topic">図書館削除</h3>
         <div class="text-center">
             <h4>図書館を削除しますか？</h4>
             <br>
-            <p>※貸出中の本や借りている本がある場合は、図書館を削除することはできません。[TODO]</p>
+            <p>※貸出中の本や借りている本がある場合は、図書館を削除することはできません。</p>
             <br>
             <form action="RemoveLibrary" method="POST">
                 <input type="hidden" name="method" value="executeDel"/>

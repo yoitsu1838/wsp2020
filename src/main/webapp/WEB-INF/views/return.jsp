@@ -17,6 +17,7 @@
         }
     %>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>個人図書館システム</title>
 
     <!--  all -->
@@ -57,7 +58,7 @@
             <!--Collapside-->
             <div class="navbar-collapse collapse" id="libNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active hoverlink">
+                    <li class="nav-item hoverlink">
                         <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/">
                             ホーム
                         </a>
@@ -67,7 +68,7 @@
                             貸出承認
                         </a>
                     </li>
-                    <li class="nav-item hoverlink">
+                    <li class="nav-item active hoverlink">
                         <a class="nav-link waves-effect waves-light" href="<%=request.getContextPath() %>/Return">
                             返却反映
                         </a>

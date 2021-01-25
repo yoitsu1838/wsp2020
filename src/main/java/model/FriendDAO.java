@@ -77,7 +77,6 @@ public class FriendDAO {
         String url = prop.getProperty("dbName");
 
 
-
         Connection connection;
         String sql = "SELECT * FROM friends WHERE library_id=? AND friends_library_key=?";
 
@@ -186,15 +185,11 @@ public class FriendDAO {
             pstmt.setString(1, userLibId);
             pstmt.setString(2, target);
 
-            ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
+            pstmt.execute();
 
-                result = true;
-
-            }
+            result = true;
 
 
-            resultSet.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();

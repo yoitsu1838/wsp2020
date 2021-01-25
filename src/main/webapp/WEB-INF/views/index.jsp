@@ -11,6 +11,7 @@
         }
     %>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>個人図書館システム</title>
 
     <!--  all -->
@@ -163,9 +164,12 @@
                     <div class="card shadow-none mb-3">
                         <div class="card-body border border-info"><a href="<%=request.getContextPath() %>/"><h4
                                 class="my-auto">
-                            <% if (!(session.getAttribute("member") == null)) {
-                                out.print(((User) session.getAttribute("member")).getLibraryName());
-                            } %>
+                            <%
+                                String nowUser = "";
+                                if (!(session.getAttribute("member") == null)) {
+                                    nowUser = ((User) session.getAttribute("member")).getLibraryName();
+                                    out.print(nowUser);
+                                } %>
                         </h4></a></div>
                     </div>
 
@@ -182,7 +186,11 @@
                                 for (String libName : nameList) {
                                     if (libName == null) {
                                         continue;
+                                    } else if (libName.equals(nowUser)) {
+                                        continue;
                                     }
+
+
                             %>
                             <form action="./" name="form<%=count%>" method="POST">
                                 <li class="list-group-item">

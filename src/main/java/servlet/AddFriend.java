@@ -30,37 +30,47 @@ public class AddFriend extends HttpServlet {
         if (!(request.getParameter("method") == null) && request.getParameter("method").equals("fad")) {
             System.out.println("fad");
             FriendManager fm = new FriendManager();
-            if (!fm.exsistingCheck(request, dbInfoPath)) {
-                //重複がない時
-                fm.addFriend(request, dbInfoPath);
-                request.setAttribute("message", "友人追加しました。");
+            if (((User) session.getAttribute("member")).getLibraryId().equals(request.getParameter("uid"))) {
+                request.setAttribute("errMsg", "自分自身を友人追加することはできません。");
+                //AddBookへもどる　
+                String disp = "/";
+                RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+                dispatch.forward(request, response);
             } else {
-                //重複がある時
-                request.setAttribute("errMsg", "この図書館は、すでに友人に追加済みです。");
 
+
+                if (!fm.exsistingCheck(request, dbInfoPath)) {
+                    //重複がない時
+                    fm.addFriend(request, dbInfoPath);
+                    request.setAttribute("message", "友人追加しました。");
+                } else {
+                    //重複がある時
+                    request.setAttribute("errMsg", "この図書館は、すでに友人に追加済みです。");
+
+                }
+                /* toppage 友人データ取得*/
+                UserManager um = new UserManager();
+                FriendList friendList = fm.loadFriends(request, dbInfoPath);
+                List<Friend> list;
+                List<String> friendLibNames = new ArrayList<String>();
+                List<String> friendLibIds = new ArrayList<String>();
+                list = friendList.getList();
+                for (Friend friend : list) {
+                    String libId = friend.getFriendLibraryId();
+                    String libName = um.getLibraryName(libId, dbInfoPath);
+                    friendLibNames.add(libName);
+                    friendLibIds.add(libId);
+                }
+
+                request.setAttribute("friendNameList", friendLibNames);
+                request.setAttribute("friendlist", friendLibIds);
+                /* // */
+
+                //AddBookへもどる　
+                String disp = "/";
+                RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+                dispatch.forward(request, response);
             }
-            /* toppage 友人データ取得*/
-            UserManager um = new UserManager();
-            FriendList friendList = fm.loadFriends(request, dbInfoPath);
-            List<Friend> list;
-            List<String> friendLibNames = new ArrayList<String>();
-            List<String> friendLibIds = new ArrayList<String>();
-            list = friendList.getList();
-            for (Friend friend : list) {
-                String libId = friend.getFriendLibraryId();
-                String libName = um.getLibraryName(libId, dbInfoPath);
-                friendLibNames.add(libName);
-                friendLibIds.add(libId);
-            }
-
-            request.setAttribute("friendNameList", friendLibNames);
-            request.setAttribute("friendlist", friendLibIds);
-            /* // */
-
-            //AddBookへもどる　
-            String disp = "/";
-            RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-            dispatch.forward(request, response);
 
         } else {
 

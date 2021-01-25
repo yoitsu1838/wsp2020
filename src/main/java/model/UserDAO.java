@@ -229,7 +229,7 @@ public class UserDAO {
 
         // memberがDBにあるかどうかを調べる
 
-        //TODO Exceptionの解決
+        //TODO パスワード認証
 
         Connection connection;
         String sql = "select * from users where user_id=?";
@@ -255,15 +255,15 @@ public class UserDAO {
                 String encryptedPassword = resultSet.getString("user_pass");
                 if (encoder.matches(textPassword, encryptedPassword)) {
                     //System.out.println("matched");
-                    result = true;
+
                 } else {
                     // System.out.println("mismatched");
                 }
             }
 
             if (result) {
-                ResultSet resultSet2 = pstmt2.executeQuery();
-                System.out.println(resultSet2);
+                pstmt2.execute();
+                result = true;
             }
 
             resultSet.close();

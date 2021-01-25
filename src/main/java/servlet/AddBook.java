@@ -65,9 +65,9 @@ public class AddBook extends HttpServlet {
             /**/
 
             book.setIsbn(bookId);
-            book.setTitle(title);
-            book.setAuthor(author);
-            book.setVolume(volume);
+            book.setTitle(CollectionManager.htmlEscape(title));
+            book.setAuthor(CollectionManager.htmlEscape(author));
+            book.setVolume(CollectionManager.htmlEscape(volume));
             book.setRemarks(CollectionManager.htmlEscape(remark));
 
         }
